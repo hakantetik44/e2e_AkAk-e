@@ -1,9 +1,10 @@
 package stepdefinitions;
 
-import io.cucumber.java.fr.Alors;
-import io.cucumber.java.fr.Et;
-import io.cucumber.java.fr.Quand;
-import io.cucumber.java.fr.Étantdonnéque;
+import com.github.javafaker.Faker;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -13,13 +14,10 @@ import org.slf4j.LoggerFactory;
 import pages.BasePageAndroid;
 import pages.OverkizPages;
 import utils.ConfigReader;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
 import static org.junit.Assert.*;
-import static utils.DriverMobile.getDriver;
+import static utils.Driver.getDriver;
 
 public class PageStepDefsAndroid extends BasePageAndroid {
 
@@ -27,86 +25,97 @@ public class PageStepDefsAndroid extends BasePageAndroid {
     OverkizPages overkiz = new OverkizPages();
     Actions actions = new Actions(getDriver());
 
+    Faker faker = new Faker();
+
     Random random = new Random();
 
-    @Étantdonnéque("lutilisateur souhaite se connecter à l'application")
+    @Given("lutilisateur souhaite se connecter à l'application")
     public void lutilisateurSouhaiteSeConnecterLApplication() {
         //TODO:
     }
-    @Quand("il accède à l'application Overkiz")
-    public void ilAccedeALApplicationOverkiz(){
+
+    @When("il accède à l'application Overkiz")
+    public void ilAccedeALApplicationOverkiz() {
         cliquerLogoOverKizConnectSixFois(actions, overkiz.logoOverKizConnect);
         assertTrue(overkiz.serverStd.isDisplayed());
         overkiz.editText105.clear();
         overkiz.serverStd.click();
         overkiz.editText.sendKeys("24");
-        overkiz.tvOk.click();}
-    @Et("utilisateur voit les champs {string} et {string} sur la page d'accueil")
+        overkiz.tvOk.click();
+    }
+
+    @And("utilisateur voit les champs {string} et {string} sur la page d'accueil")
     public void utilisateurVoitLesChampsEtSurLaPageDAccueil(String expectedText1, String expectedText2) {
-        String actualTextConnexionTitle = "Connexion";
-        assertEquals(overkiz.titleConnexion.getText(), actualTextConnexionTitle);
-        assertTrue(overkiz.textEmail.getText().contains(expectedText1)
-                && overkiz.textMotDePasse.getText().contains(expectedText2));}
-    @Alors("l'utilisateur saisit ses informations de connexion")
+     //TODO:
+    }
+
+    @Then("l'utilisateur saisit ses informations de connexion")
     public void lUtilisateurSaisitSesInformationsDeConnexion() throws InterruptedException {
         overkiz.placeHolderEmail.sendKeys(ConfigReader.getProperty("adressseEmail"));
         overkiz.placeHolderMotDePasse.click();
         overkiz.getPlaceHolderMotDePasseText.sendKeys(ConfigReader.getProperty("motDePasse"));
     }
-    @Et("l'utilisateur se connecte à son compte")
+
+    @And("l'utilisateur se connecte à son compte")
     public void lUtilisateurSeConnecteASonCompte() {
         overkiz.btnSeConnecter.click();
         String expectedText = "Bonjour";
         assertTrue(overkiz.textBonjourName.getText().contains(expectedText));
 
     }
-    @Et("l'utilisateur saisit son adresse e-mail valide")
+    @And("l'utilisateur saisit son adresse e-mail valide")
     public void lUtilisateurSaisitSonAdresseEMailValide() {
         overkiz.placeHolderEmail.sendKeys(ConfigReader.getProperty("adressseEmail"));
     }
-    @Alors("si l'utilisateur saisit une adresse e-mail invalide")
+
+    @Then("si l'utilisateur saisit une adresse e-mail invalide")
     public void siLUtilisateurSaisitUneAdresseEMailInvalide() {
         overkiz.placeHolderMotDePasse.click();
         overkiz.getPlaceHolderMotDePasseText.sendKeys(ConfigReader.getProperty("invalideMotDePasse"));
     }
-    @Et("un message d'erreur saffiche correctement")
+
+    @And("un message d'erreur saffiche correctement")
     public void unMessageDErreurSafficheCorrectement() {
         overkiz.btnSeConnecter.click();
-        String textMessageDerruer="Le processus d'authentification a échoué à cause d'un problème avec le compte (désactivé, expiré, …)";
+        String textMessageDerruer = "Le processus d'authentification a échoué à cause d'un problème avec le compte (désactivé, expiré, …)";
         assertTrue(overkiz.invalidSnackbarText.getText().contains(textMessageDerruer));
         System.out.println(overkiz.invalidSnackbarText.getText());
 
     }
-    @Alors("si l'utilisateur saisit un mot de passe invalide")
+
+    @Then("si l'utilisateur saisit un mot de passe invalide")
     public void siLUtilisateurSaisitUnMotDePasseInvalide() {
         overkiz.placeHolderEmail.sendKeys(ConfigReader.getProperty("invalideAdressseEmail"));
         overkiz.btnSeConnecter.click();
-        String textMessageDerruer="Le processus d'authentification a échoué à cause d'un problème avec le compte (désactivé, expiré, …)";
+        String textMessageDerruer = "Le processus d'authentification a échoué à cause d'un problème avec le compte (désactivé, expiré, …)";
         assertTrue(overkiz.invalidSnackbarText.getText().contains(textMessageDerruer));
         System.out.println(overkiz.invalidSnackbarText.getText());
 
     }
-    @Et("l'utilisateur laisse le champ dadresse e-mail vide")
+
+    @And("l'utilisateur laisse le champ dadresse e-mail vide")
     public void lUtilisateurLaisseLeChampDadresseEMailVide() {
         overkiz.placeHolderMotDePasse.click();
         overkiz.getPlaceHolderMotDePasseText.sendKeys("");
 
     }
-    @Alors("l'utilisateur laisse le champ du mot de passe vide")
+
+    @Then("l'utilisateur laisse le champ du mot de passe vide")
     public void lUtilisateurLaisseLeChampDuMotDePasseVide() {
         overkiz.placeHolderEmail.sendKeys("");
         overkiz.btnSeConnecter.click();
-        String textMessageDerruer="Le processus d'authentification a échoué à cause d'un problème avec le compte (désactivé, expiré, …)";
+        String textMessageDerruer = "Le processus d'authentification a échoué à cause d'un problème avec le compte (désactivé, expiré, …)";
         assertTrue(overkiz.invalidSnackbarText.getText().contains(textMessageDerruer));
         System.out.println(overkiz.invalidSnackbarText.getText());
     }
-    @Étantdonnéque("lutilisateur souhaite vérifier les éléments sur la page d'accueil")
+
+    @Given("lutilisateur souhaite vérifier les éléments sur la page d'accueil")
     public void lutilisateurSouhaiteVerifierLesElementsSurLaPageDAccueil() {
     }
 
 
-
-    @Alors("les éléments de la page d'accueil sont vérifiés conformément aux spécifications")
+    @Then
+            ("les éléments de la page d'accueil sont vérifiés conformément aux spécifications")
     public void lesElementsDeLaPageDAccueilSontVerifiesConformementAuxSpecifications() throws InterruptedException {
         overkiz.btnSeConnecter.click();
         Thread.sleep(2000);
@@ -143,18 +152,20 @@ public class PageStepDefsAndroid extends BasePageAndroid {
                 Assert.fail("Erreur : Le texte '" + text + "' n'est pas trouvé dans l'élément !");
 
             }
-        }}
-    @Étantdonnéque("l'utilisateur souhaite vérifier ses informations personnelles")
+        }
+    }
+
+    @Given("l'utilisateur souhaite vérifier ses informations personnelles")
     public void lUtilisateurSouhaiteVerifierSesInformationsPersonnelles() {
         //TODO:
     }
 
 
-    @Étantdonnéque("l'utilisateur souhaite modifier ses informations personnelles")
+    @Given("l'utilisateur souhaite modifier ses informations personnelles")
     public void lUtilisateurSouhaiteModifierSesInformationsPersonnelles() {
     }
 
-    @Quand("il accède à l'application Overkiz avec ses informations de connexion")
+    @When("il accède à l'application Overkiz avec ses informations de connexion")
     public void ilAccedeALApplicationOverkizAvecSesInformationsDeConnexion() {
         cliquerLogoOverKizConnectSixFois(actions, overkiz.logoOverKizConnect);
         assertTrue(overkiz.serverStd.isDisplayed());
@@ -168,13 +179,13 @@ public class PageStepDefsAndroid extends BasePageAndroid {
         overkiz.btnSeConnecter.click();
     }
 
-    @Et("l'utilisateur peut vérifier ses informations personnelles")
+    @And("l'utilisateur peut vérifier ses informations personnelles")
     public void lUtilisateurPeutVerifierSesInformationsPersonnelles() throws InterruptedException {
         overkiz.btnEnPlus.click();
         overkiz.btnMesInformations.click();
         Thread.sleep(3000);
         List<WebElement> elementList2 = getDriver().findElements(By.className("android.widget.TextView"));
-        String[] textsToVerify2= {
+        String[] textsToVerify2 = {
                 "Prénom",
                 "Nom",
                 "Téléphone",
@@ -199,10 +210,10 @@ public class PageStepDefsAndroid extends BasePageAndroid {
             }
         }
 
-        scrollUp(overkiz.placeEmail,-50);
+        scrollUp(overkiz.placeEmail, -50);
 
         List<WebElement> elementList3 = getDriver().findElements(By.className("android.widget.TextView"));
-        String[] textsToVerify3= {
+        String[] textsToVerify3 = {
                 "Coordonnées GPS",
                 "Lever de soleil / Coucher de soleil",
                 "Numéro de passerelle",
@@ -228,9 +239,7 @@ public class PageStepDefsAndroid extends BasePageAndroid {
     }
 
 
-
-
-    @Alors("l'utilisateur peut modifier ses informations personnelles")
+    @Then("l'utilisateur peut modifier ses informations personnelles")
     public void lUtilisateurPeutModifierSesInformationsPersonnelles() throws InterruptedException {
         Random random = new Random();
 
@@ -254,7 +263,7 @@ public class PageStepDefsAndroid extends BasePageAndroid {
         overkiz.placeHolderMesInformations.sendKeys(getRandomPhoneNumber());
         overkiz.tvOk.click();
         assertTrue(overkiz.snackbarText.getText().contains("Votre profil a été mis à jour"));
-        overkiz.placeAdresse .click();
+        overkiz.placeAdresse.click();
         overkiz.btnAutoriser.click();
         overkiz.btnModifier.click();
         Thread.sleep(1000);
@@ -272,9 +281,6 @@ public class PageStepDefsAndroid extends BasePageAndroid {
         assertTrue(overkiz.snackbarText.getText().contains("Votre profil a été mis à jour"));
 
 
-
-
-
         String nouveauNom = overkiz.placePrénom.getText();
         if (nouveauNom.equals("Tom")) {
             System.out.println("L'enregistrement a été effectué avec succès. Le nom Tom est visible.");
@@ -283,18 +289,142 @@ public class PageStepDefsAndroid extends BasePageAndroid {
         }
 
 
-
     }
 
 
-    @Et("l'utilisateur ne peut pas modifier certaines informations.")
+    @And("l'utilisateur ne peut pas modifier certaines informations")
     public void lUtilisateurNePeutPasModifierCertainesInformations() {
-        scrollUp(overkiz.placeEmail,-50);
+
         assertFalse(overkiz.placeFuseauHoraire.isEnabled());
+        scrollUp(overkiz.placeEmail, -50);
         assertFalse(overkiz.placeCoordonnées.isEnabled());
         assertFalse(overkiz.placeLeverDeSoleil.isEnabled());
         assertFalse(overkiz.placeNuméroParselle.isEnabled());
         assertFalse(overkiz.placeServeurDeConnexion.isEnabled());
+
+    }
+
+    @Given("l'utilisateur est sur lécran daccueil")
+    public void lUtilisateurEstSurLécranDaccueil() {
+        cliquerLogoOverKizConnectSixFois(actions, overkiz.logoOverKizConnect);
+        assertTrue(overkiz.serverStd.isDisplayed());
+        overkiz.editText105.clear();
+        overkiz.serverStd.click();
+        overkiz.editText.sendKeys("24");
+        overkiz.tvOk.click();
+        overkiz.placeHolderEmail.sendKeys(ConfigReader.getProperty("adressseEmail"));
+        overkiz.placeHolderMotDePasse.click();
+        overkiz.getPlaceHolderMotDePasseText.sendKeys(ConfigReader.getProperty("motDePasse"));
+        overkiz.btnSeConnecter.click();
+        assertTrue(overkiz.textBonjourName.getText().contains("Bonjour"));
+    }
+
+    @When("l'utilisateur sélectionne le {string} pour la géolocalisation")
+    public void lUtilisateurSélectionneLePourLaGéolocalisation(String textScénarios) {
+        assertEquals(overkiz.btnScénarios.getText(), textScénarios);
+        System.out.println(overkiz.btnScénarios.getText() + textScénarios);
+        overkiz.btnScénarios.click();
+        overkiz.Scénarios.click();
+    }
+
+    @And("l'utilisateur clique sur Géolocaliser")
+    public void lUtilisateurCliqueSurGéolocaliser() {
+        overkiz.btnGeolocalisation.click();
+        overkiz.btnOk.click();
+        overkiz.btnAutoriserToujours.click();
+    }
+
+    @Then("trois actions sont possibles : Désactiver, Toujours activer, Activer une fois")
+    public void troisActionsSontPossiblesDésactiverToujoursActiverActiverUneFois() {
+        assertTrue(overkiz.btnActiverUneFois.isDisplayed()
+                && overkiz.btnToujoursActiver.isDisplayed()
+                && overkiz.btnDésactiver.isDisplayed());
+
+    }
+    @And("l'utilisateur clique sur Toujours activer après avoir ajusté la distance")
+    public void lUtilisateurCliqueSurToujoursActiverAprèsAvoirAjustéLaDistance() {
+        overkiz.btnToujoursActiver.click();
+    }
+    @When("l'utilisateur peut choisir une distance entre {int}m And {int}km à laide dun curseur nommé {string}")
+    public void lUtilisateurPeutChoisirUneDistanceEntreMAndKmÀLaideDunCurseurNommé(int arg0, int arg1, String expectedText) {
+        assertTrue(overkiz.textDistanceDeDomicile.getText().contains(expectedText));
+    }
+
+    @Then("l'utilisateur vérifie dans linterface dadministration que la planification est prise en compte dans le menu")
+    public void lUtilisateurVérifieDansLinterfaceDadministrationQueLaPlanificationEstPriseEnCompteDansLeMenu() {
+
+        //TODO:faire un test pour vérifier que la planification est prise en compte dans le menu
+    }
+
+    @And("l'utilisateur clique de nouveau sur {string}")
+    public void lUtilisateurCliqueDeNouveauSur(String expectedText) {
+        overkiz.btnRetour.click();
+        assertTrue(overkiz.btnGeolocalisation.getText().contains(expectedText));
+        overkiz.btnGeolocalisation.click();
+
+    }
+
+    @And("l'utilisateur clique sur Enregistrer")
+    public void lUtilisateurCliqueSurEnregistrer() {
+        overkiz.btnEnregister.click();
+
+    }
+
+    @When("l'utilisateur clique sur Activer une fois après avoir ajusté la distance")
+    public void lUtilisateurCliqueSurActiverUneFoisAprèsAvoirAjustéLaDistance() {
+        if(overkiz.btnActiverUneFois.isEnabled()) {overkiz.btnActiverUneFois.click();}
+
+    }
+
+    @When("l'utilisateur clique sur Désactiver")
+    public void lUtilisateurCliqueSurDésactiver() {
+
+        if(overkiz.btnDésactiver.isEnabled()) {
+            overkiz.btnDésactiver.click();
+        }
+    }
+
+    @And("utilisateur voit les champs {string} And {string} sur la page d'accueil")
+    public void utilisateurVoitLesChampsAndSurLaPageDAccueil(String expectedText1, String expectedText2) {
+        String actualTextConnexionTitle = "Connexion";
+        assertEquals(overkiz.titleConnexion.getText(), actualTextConnexionTitle);
+        assertTrue(overkiz.textEmail.getText().contains(expectedText1)
+                && overkiz.textMotDePasse.getText().contains(expectedText2));}
+
+
+
+    @When("l'utilisateur clique sur {string} dans longlet {string}")
+    public void lUtilisateurCliqueSurDansLonglet(String textGérerMesAccés, String textEnPlus) {
+        overkiz.btnEnPlus.click();
+        overkiz.btnGérerMesAccèsSecondaires.click();
+
+    }
+
+    @And("il saisi l'adresse e-mail et le mot de passe du compte secondaire")
+    public void ilSaisiLAdresseEMailEtLeMotDePasseDuCompteSecondaire() {
+        String email = faker.internet().emailAddress();
+        overkiz.placeHolderLogin.sendKeys(email);
+        overkiz.placeComteSecondaireMDP.sendKeys(ConfigReader.getProperty("motDePasse"));
+        overkiz.placeComteSecondaiConfirmerMDP.sendKeys(ConfigReader.getProperty("motDePasse"));
+
+
+    }
+
+
+    @And("il clique sur le bouton {string} en bas")
+    public void ilCliqueSurLeBoutonEnBas(String textCréer) {
+        assertTrue(overkiz.btnCréer.getText().contains(textCréer));
+        overkiz.btnCréer.click();
+
+
+    }
+
+    @Then("l'accès secondaire est créé")
+    public void lAccèsSecondaireEstCréé() {
+    }
+
+    @And("un écran récapitulatif des comptes secondaires existants apparaît")
+    public void unÉcranRécapitulatifDesComptesSecondairesExistantsApparaît() {
 
     }
 }

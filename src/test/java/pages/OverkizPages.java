@@ -6,7 +6,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import static utils.DriverMobile.getDriver;
+import static utils.Driver.getDriver;
 
 
 public class OverkizPages {
@@ -19,19 +19,19 @@ public class OverkizPages {
     }
 
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/im_logo")
-    public WebElement logoOverKizConnect;
+    @AndroidFindBy(xpath = "(//android.widget.ImageView)[2]")
+    public WebElement logoOverKizConnect; //
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/server_std")
+    @AndroidFindBy(xpath = "(//android.widget.RadioButton)[2]")
     public WebElement serverStd;
 
-    @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"105\"]")
+    @AndroidFindBy(xpath = "(//android.widget.EditText)[1]")
     public WebElement editText105;
 
     @AndroidFindBy(className = "android.widget.EditText")
     public WebElement editText;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_ok")
+    @AndroidFindBy(xpath = "(//android.widget.TextView)[3]")
     public WebElement tvOk;
 
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_email")
@@ -112,7 +112,8 @@ public class OverkizPages {
 
     @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
     public WebElement btnAutoriser;
-
+    @AndroidFindBy(id="com.android.permissioncontroller:id/permission_allow_always_button")
+    public WebElement btnAutoriserToujours;
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/snackbar_text")
     public WebElement snackbarText;
 
@@ -131,11 +132,10 @@ public class OverkizPages {
     @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"Europe/Paris\"]")
     public WebElement placeFuseauHoraire;
 
-    @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"Latitude : 44.920191300000006\n" +
-            "Longitude : 4.902792\"]")
+    @AndroidFindBy(xpath = "(//android.widget.EditText)[4]")
     public WebElement placeCoordonnées;
 
-    @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"6:46 / 20:40\"]")
+    @AndroidFindBy(xpath = "(//android.widget.EditText)[5]")
     public WebElement placeLeverDeSoleil;
 
     @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"2202-5934-6827\"]")
@@ -143,6 +143,45 @@ public class OverkizPages {
 
     @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"STD24\"]")
     public WebElement placeServeurDeConnexion;
+
+
+    @AndroidFindBy(xpath= "//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.overkiz.kizconnect:id/rv_scenario\"]/android.view.ViewGroup")
+    public WebElement Scénarios;
+
+    @AndroidFindBy(id="com.overkiz.kizconnect:id/tv_geolocalisation")
+    public WebElement btnGeolocalisation;
+
+    @AndroidFindBy(id="android:id/button1")
+    public WebElement btnOk;
+    @AndroidFindBy(id="com.overkiz.kizconnect:id/tv_deactivate")
+    public WebElement btnDésactiver;
+    @AndroidFindBy(id="com.overkiz.kizconnect:id/tv_activate_always")
+    public WebElement btnToujoursActiver;
+    @AndroidFindBy(id="com.overkiz.kizconnect:id/tv_activate_once")
+    public WebElement btnActiverUneFois;
+    @AndroidFindBy(id="com.overkiz.kizconnect:id/progress_distance")
+    public WebElement progressDistance;
+
+    @AndroidFindBy(id="com.overkiz.kizconnect:id/label_distance")
+    public WebElement textDistanceDeDomicile;
+    @AndroidFindBy(id="com.overkiz.kizconnect:id/im_back")
+    public WebElement btnRetour;
+    @AndroidFindBy(id="com.overkiz.kizconnect:id/tv_enregister")
+    public WebElement btnEnregister;
+    @AndroidFindBy(xpath = "(//android.widget.TextView)[4]")
+    public WebElement btnGérerMesAccèsSecondaires;
+    @AndroidFindBy(id="com.overkiz.kizconnect:id/et_login")
+    public WebElement placeHolderLogin;
+    @AndroidFindBy(id="com.overkiz.kizconnect:id/et_password")
+    public WebElement placeComteSecondaireMDP;
+
+    @AndroidFindBy(id="com.overkiz.kizconnect:id/et_confirm_pw")
+    public WebElement placeComteSecondaiConfirmerMDP;
+
+    @AndroidFindBy(id="com.overkiz.kizconnect:id/tv_valide")
+    public WebElement btnCréer;
+
+
 
 
 

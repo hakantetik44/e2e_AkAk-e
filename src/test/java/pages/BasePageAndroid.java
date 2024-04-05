@@ -3,7 +3,6 @@ package pages;
 
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
@@ -20,7 +19,7 @@ import java.util.*;
 
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.PointOption.point;
-import static utils.DriverMobile.getDriver;
+import static utils.Driver.getDriver;
 
 
 public class BasePageAndroid {
@@ -218,6 +217,24 @@ public class BasePageAndroid {
                 return false;}
         } catch (Exception e) {
             return false;}}
+
+    public void cliquerSurLocatorEtPoint(By locator, int y) {
+        try {
+            // Locator'u kullanarak ilgili elementi bulun
+            WebElement element = driver.findElement(locator);
+
+            // Elementin koordinatlarını alın
+            int x = element.getLocation().getX();
+
+            // Y koordinatını kullanarak tıklama işlemi gerçekleştirin
+            TouchAction touchAction = new TouchAction((PerformsTouchActions) getDriver());
+            touchAction.tap(PointOption.point(x, y))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))) // Opsiyonel: Bekleme süresi
+                    .perform();
+        } catch (Exception e) {
+            System.out.println("Hata oluştu: " + e.getMessage());
+        }
+    }
 
 }
 
