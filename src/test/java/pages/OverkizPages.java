@@ -34,27 +34,32 @@ public class OverkizPages {
     @AndroidFindBy(xpath = "(//android.widget.TextView)[3]")
     public WebElement tvOk;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_email")
+    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_ok")
+    public WebElement getTvOk;
+    @AndroidFindBy(xpath = "(//android.widget.TextView)[2]")
     public WebElement textEmail;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_pw")
+    @AndroidFindBy(xpath = "(//android.widget.TextView)[3]")
     public WebElement textMotDePasse;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_title")
+    @AndroidFindBy(xpath = "(//android.widget.TextView)[1]")
     public WebElement titleConnexion;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/zone_email")
+    @AndroidFindBy(xpath = "(//android.widget.EditText)[1]")
     public WebElement placeHolderEmail;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/zone_pw")
+    @AndroidFindBy(id="com.overkiz.kizconnect:id/zone_pw")
+    public WebElement getTvPw;
+
+    @AndroidFindBy(xpath = "(//android.widget.EditText)[1]")
     public WebElement placeHolderMotDePasse;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/input_pw")
+    @AndroidFindBy(xpath = "(//android.widget.EditText)[2]")
     public WebElement getPlaceHolderMotDePasseText;
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_login")
+    @AndroidFindBy(xpath = "(//android.widget.TextView)[4]")
     public WebElement btnSeConnecter;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/name")
+    @AndroidFindBy(xpath = "(//android.widget.TextView)[1]")
     public WebElement textBonjourName;
 
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/snackbar_text")
@@ -112,7 +117,7 @@ public class OverkizPages {
 
     @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
     public WebElement btnAutoriser;
-    @AndroidFindBy(id="com.android.permissioncontroller:id/permission_allow_always_button")
+    @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_always_button")
     public WebElement btnAutoriserToujours;
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/snackbar_text")
     public WebElement snackbarText;
@@ -145,45 +150,41 @@ public class OverkizPages {
     public WebElement placeServeurDeConnexion;
 
 
-    @AndroidFindBy(xpath= "//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.overkiz.kizconnect:id/rv_scenario\"]/android.view.ViewGroup")
+    @AndroidFindBy(xpath = "//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.overkiz.kizconnect:id/rv_scenario\"]/android.view.ViewGroup")
     public WebElement Scénarios;
 
-    @AndroidFindBy(id="com.overkiz.kizconnect:id/tv_geolocalisation")
+    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_geolocalisation")
     public WebElement btnGeolocalisation;
 
-    @AndroidFindBy(id="android:id/button1")
+    @AndroidFindBy(id = "android:id/button1")
     public WebElement btnOk;
-    @AndroidFindBy(id="com.overkiz.kizconnect:id/tv_deactivate")
+    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_deactivate")
     public WebElement btnDésactiver;
-    @AndroidFindBy(id="com.overkiz.kizconnect:id/tv_activate_always")
+    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_activate_always")
     public WebElement btnToujoursActiver;
-    @AndroidFindBy(id="com.overkiz.kizconnect:id/tv_activate_once")
+    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_activate_once")
     public WebElement btnActiverUneFois;
-    @AndroidFindBy(id="com.overkiz.kizconnect:id/progress_distance")
+    @AndroidFindBy(id = "com.overkiz.kizconnect:id/progress_distance")
     public WebElement progressDistance;
 
-    @AndroidFindBy(id="com.overkiz.kizconnect:id/label_distance")
+    @AndroidFindBy(id = "com.overkiz.kizconnect:id/label_distance")
     public WebElement textDistanceDeDomicile;
-    @AndroidFindBy(id="com.overkiz.kizconnect:id/im_back")
+    @AndroidFindBy(id = "com.overkiz.kizconnect:id/im_back")
     public WebElement btnRetour;
-    @AndroidFindBy(id="com.overkiz.kizconnect:id/tv_enregister")
+    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_enregister")
     public WebElement btnEnregister;
     @AndroidFindBy(xpath = "(//android.widget.TextView)[4]")
     public WebElement btnGérerMesAccèsSecondaires;
-    @AndroidFindBy(id="com.overkiz.kizconnect:id/et_login")
+    @AndroidFindBy(id = "com.overkiz.kizconnect:id/et_login")
     public WebElement placeHolderLogin;
-    @AndroidFindBy(id="com.overkiz.kizconnect:id/et_password")
+    @AndroidFindBy(id = "com.overkiz.kizconnect:id/et_password")
     public WebElement placeComteSecondaireMDP;
 
-    @AndroidFindBy(id="com.overkiz.kizconnect:id/et_confirm_pw")
+    @AndroidFindBy(id = "com.overkiz.kizconnect:id/et_confirm_pw")
     public WebElement placeComteSecondaiConfirmerMDP;
 
-    @AndroidFindBy(id="com.overkiz.kizconnect:id/tv_valide")
+    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_valide")
     public WebElement btnCréer;
-
-
-
-
 
 
 }
