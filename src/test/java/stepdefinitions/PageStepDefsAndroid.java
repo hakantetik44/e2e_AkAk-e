@@ -512,10 +512,7 @@ public class PageStepDefsAndroid extends BasePage {
          overkiz.btnEnPlus.click();
          Thread.sleep(1000);
          scrollUp(overkiz.btnNotification,-40);
-
          manager.clickOnElement("tv_log_out");
-
-
 
 
     }
