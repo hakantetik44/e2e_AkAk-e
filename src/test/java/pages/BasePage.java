@@ -62,7 +62,6 @@ public class BasePage {
 
     }
 
-
     public void scrollFromUpToButtom(AppiumDriver driver) throws InterruptedException, MalformedURLException {
 
         Dimension dimension = getDriver().manage().window().getSize();
@@ -75,7 +74,6 @@ public class BasePage {
         touch.press(point(start_x, start_y)).waitAction(waitOptions(Duration.ofSeconds(1))).moveTo(point(end_x, end_y)).release().perform();
         Thread.sleep(3000);
     }
-
 
     public void scrollDown(AppiumDriver driver) throws InterruptedException, MalformedURLException {
 
@@ -220,13 +218,11 @@ public class BasePage {
 
     public void cliquerSurLocatorEtPoint(By locator, int y) {
         try {
-            // Locator'u kullanarak ilgili elementi bulun
             WebElement element = driver.findElement(locator);
 
-            // Elementin koordinatlarını alın
             int x = element.getLocation().getX();
 
-            // Y koordinatını kullanarak tıklama işlemi gerçekleştirin
+
             TouchAction touchAction = new TouchAction((PerformsTouchActions) getDriver());
             touchAction.tap(PointOption.point(x, y))
                     .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))) // Opsiyonel: Bekleme süresi
