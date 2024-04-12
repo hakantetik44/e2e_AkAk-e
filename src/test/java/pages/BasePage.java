@@ -225,14 +225,12 @@ public class BasePage {
 
             TouchAction touchAction = new TouchAction((PerformsTouchActions) getDriver());
             touchAction.tap(PointOption.point(x, y))
-                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500))) // Opsiyonel: Bekleme süresi
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
                     .perform();
         } catch (Exception e) {
-            System.out.println("Hata oluştu: " + e.getMessage());
+            System.out.println("L'erruer: " + e.getMessage());
         }
     }
-
-
 
 
 }
