@@ -1,42 +1,66 @@
 package stepdefinitions;
-
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import utils.Driver;
 import java.net.MalformedURLException;
-import java.util.List;
+import java.util.*;
 
+import static utils.Driver.getDriver;
 import static utils.Driver.quitDriver;
-public class Hooks {
-    private static AppiumDriver appiumDriver;
-    public static AppiumDriver getDriver() {
-        return appiumDriver;
-    }
-    public static String apk;
-    public static int apkIndex = -1; // Nous commençons par -1, car après l'incrémentation, il deviendra 0.
 
+public class Hooks {
+    public static String apk;
+    private static final Map<String, String> apkMap = new HashMap<>();
+    private static final List<String> availableApks = new ArrayList<>();
+    private static final Queue<String> lastThreeSelectedApks = new LinkedList<>();
+
+    static {
+        apkMap.put("@kizconnectAndroid", "kizconnect.apk");
+        apkMap.put("@hexaconnectAndroid", "hexaconnect.apk");
+        apkMap.put("@wisniowskiAndroid", "wisniowski.apk");
+        apkMap.put("@flexomV3Android", "FlexomV3.apk");
+        availableApks.addAll(apkMap.values());
+    }
+
+    public static String getApkForTags(List<String> tags) {
+        List<String> apkList = new ArrayList<>();
+        for (String tag : tags) {
+            if (apkMap.containsKey(tag)) {
+                apkList.add(apkMap.get(tag));
+            }
+        }
+        if (!apkList.isEmpty()) {
+            apkList.removeAll(lastThreeSelectedApks);
+            Random random = new Random();
+            int index = random.nextInt(apkList.size());
+            String selectedApk = apkList.get(index);
+
+            lastThreeSelectedApks.add(selectedApk);
+            if (lastThreeSelectedApks.size() > 3) {
+                lastThreeSelectedApks.poll();
+            }
+            return selectedApk;
+        }
+        return null;
+    }
     @Before()
     public void setUpMobile(Scenario scenario) throws MalformedURLException, InterruptedException {
-        List<String> tags = (List<String>) scenario.getSourceTagNames();
-        if (tags.contains("@kizconnectAndroid")) {
-            apk = "kizconnect.apk";
-        } else if (tags.contains("@hexaconnectAndroid")) {
-            apk = "hexaconnect.apk";
-        } else if (tags.contains("@wisniowskiAndroid")) {
-            apk = "wisniowski.apk";
-        } else if (tags.contains("@flexomV3Android")) {
-            apk = "FlexomV3.apk";
-        }
 
+        List<String> tags = (List<String>) scenario.getSourceTagNames();
+        String apk = getApkForTags(tags);
+        if (apk != null) {
+            Hooks.apk = apk;
+            System.out.println("Scenario tags: " + tags);
+            System.out.println("Selected APK: " + apk);
+        }
     }
 
     @After()
-    public void tearDownMobile(Scenario scenario) {
+    public void tearDownMobile(Scenario scenario) throws MalformedURLException, InterruptedException {
         if (scenario.isFailed()) {
             byte[] screenshot;
             WebDriver driver = Driver.getDriver();
@@ -49,5 +73,6 @@ public class Hooks {
         }
 
         quitDriver();
+
     }
 }

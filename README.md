@@ -24,4 +24,4 @@ Ce projet est un projet de test mobile qui vise à développer des tests pour le
 * Prise en charge de différentes plates-formes: Des tests peuvent être développés pour les plates-formes Android et iOS.
 * Maintenance facile: Les scénarios de test écrits en langage Gherkin peuvent être facilement mis à jour.
 * Rapports détaillés: Des rapports détaillés des résultats des tests peuvent être générés à l'aide de l'outil de reporting Masterthought.
-  
+

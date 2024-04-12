@@ -13,12 +13,16 @@ import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
 import java.time.Duration;
+
+
+
+
 public class Driver {
     private Driver() {
     }
     private static UiAutomator2Options options;
     private static XCUITestOptions iosOptions;
-    private static AppiumDriver appiumDriver;
+    public static AppiumDriver appiumDriver;
     public static AppiumDriver getDriver() {
 
         if (appiumDriver== null) {
@@ -50,16 +54,17 @@ public class Driver {
 
                 case "IOS":
                     iosOptions = new XCUITestOptions();
-                    iosOptions.XCODE_ORG_ID_OPTION.contains("");
-                    iosOptions.setBundleId("com.saucelabs.mydemoapp.rn")
-                            .setDeviceName("iPhone 15 pro")
-                            .setPlatformVersion("17.4")
-                            .setUdid("")
-                            .setApp("/Users/macbook/IdeaProjects/e2e_SomfyProject/src/test/resources/Apps/iOS-Real-Device-MyRNDemoApp.1.3.0-162.ipa")
+                    iosOptions.XCODE_ORG_ID_OPTION.contains("somfy.test.auto@gmail.com" );
+                    iosOptions
+                            .setDeviceName("iPhone")
+                            .setPlatformVersion("15.8.2")
+                            .setUdid("081e0d0b4ebe6ba46dd0acf2e7b7e3534056bc9f")
+                          // .setApp("/Users/hakan/IdeaProjects/e2e_overkiz/src/test/resources/Apps/Flexom.ipa")
                             .setAutomationName("XCUITest")
                             .setNoReset(false)
                             .setPlatformName("ios")
                             .setNewCommandTimeout(Duration.ofMinutes(10));
+
                     try {
                         appiumDriver = new IOSDriver(
                                 new URL("http://127.0.0.1:4723"), iosOptions
@@ -72,19 +77,21 @@ public class Driver {
         appiumDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         return appiumDriver;
     }
+
+    public static void setBundleId(String bundleId) {
+        if (iosOptions != null) {
+            iosOptions.setBundleId(bundleId);
+        } else {
+            throw new IllegalStateException("iosOptions is null. Make sure to call setBundleId after iosOptions initialization.");
+        }
+
+    }
     public static void quitDriver() {
         if (appiumDriver != null) {
             appiumDriver.quit();
             appiumDriver = null;
         }}
 
-    public static boolean isAppiumServerRunning(String host, int port) {
-        try (Socket socket = new Socket(host, port)) {
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
-    }
 
 }
 

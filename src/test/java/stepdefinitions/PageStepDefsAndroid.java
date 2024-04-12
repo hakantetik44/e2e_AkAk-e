@@ -11,16 +11,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pages.BasePageAndroid;
+import pages.AppOperationManager;
+import pages.BasePage;
 import pages.OverkizPages;
 import utils.ConfigReader;
+
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Random;
 import static org.junit.Assert.*;
-import static stepdefinitions.Hooks.apkIndex;
+import static org.openqa.selenium.devtools.v115.profiler.Profiler.stop;
 import static utils.Driver.getDriver;
 
-public class PageStepDefsAndroid extends BasePageAndroid {
+public class PageStepDefsAndroid extends BasePage {
 
     private static final Logger LOG = LoggerFactory.getLogger(PageStepDefsAndroid.class);
     OverkizPages overkiz = new OverkizPages();
@@ -28,9 +31,14 @@ public class PageStepDefsAndroid extends BasePageAndroid {
     Faker faker = new Faker();
 
     Random random = new Random();
+    AppOperationManager manager = new AppOperationManager(getDriver());
+
+    public PageStepDefsAndroid() throws MalformedURLException, InterruptedException {
+    }
 
     @Given("lutilisateur souhaite se connecter à l'application")
     public void lutilisateurSouhaiteSeConnecterLApplication() {
+
         //TODO:
     }
 
@@ -118,7 +126,7 @@ public class PageStepDefsAndroid extends BasePageAndroid {
 
 
     @Then("les éléments de la page d'accueil sont vérifiés conformément aux spécifications")
-    public void lesElementsDeLaPageDAccueilSontVerifiesConformementAuxSpecifications() throws InterruptedException {
+    public void lesElementsDeLaPageDAccueilSontVerifiesConformementAuxSpecifications() throws InterruptedException, MalformedURLException {
         overkiz.btnSeConnecter.click();
         Thread.sleep(2000);
         List<WebElement> elementList = getDriver().findElements(By.className("android.widget.TextView"));
@@ -177,7 +185,7 @@ public class PageStepDefsAndroid extends BasePageAndroid {
     }
 
     @And("l'utilisateur peut vérifier ses informations personnelles")
-    public void lUtilisateurPeutVerifierSesInformationsPersonnelles() throws InterruptedException {
+    public void lUtilisateurPeutVerifierSesInformationsPersonnelles() throws InterruptedException, MalformedURLException {
         overkiz.btnEnPlus.click();
         overkiz.btnMesInformations.click();
         Thread.sleep(3000);
@@ -288,7 +296,7 @@ public class PageStepDefsAndroid extends BasePageAndroid {
 
 
     @And("l'utilisateur ne peut pas modifier certaines informations")
-    public void lUtilisateurNePeutPasModifierCertainesInformations() {
+    public void lUtilisateurNePeutPasModifierCertainesInformations() throws MalformedURLException, InterruptedException {
 
         assertFalse(overkiz.placeFuseauHoraire.isEnabled());
         scrollUp(overkiz.placeEmail, -50);
@@ -417,6 +425,7 @@ public class PageStepDefsAndroid extends BasePageAndroid {
 
     @Then("l'accès secondaire est créé")
     public void lAccèsSecondaireEstCréé() {
+
     }
 
     @And("un écran récapitulatif des comptes secondaires existants apparaît")
@@ -426,15 +435,28 @@ public class PageStepDefsAndroid extends BasePageAndroid {
 
 
     @When("l'utilisateur navigue dans les pièces pour choisir léquipement à piloter")
-    public void lUtilisateurNavigueDansLesPiècesPourChoisirLéquipementÀPiloter() {
+    public WebElement lUtilisateurNavigueDansLesPiècesPourChoisirLéquipementÀPiloter() {
+        WebElement[] elements = {overkiz.btnOXIMOio, overkiz.btnRS100io};
+        // Generate a random index
+        Random random = new Random();
+        int randomIndex = random.nextInt(elements.length);
+        // Get the random element
+        WebElement randomElement = elements[randomIndex];
+        // Click on the random element
+        actions.moveToElement(randomElement).click().perform();
+        return randomElement;
     }
 
-    @And("l'utilisateur clique sur cet équipement")
-    public void lUtilisateurCliqueSurCetÉquipement() {
-    }
+
+
+
 
     @Then("l'utilisateur devrait être redirigé vers lécran dexploitation")
     public void lUtilisateurDevraitÊtreRedirigéVersLécranDexploitation() {
+
+
+
+
     }
 
     @And("l'utilisateur devrait voir le nom de léquipement")
@@ -483,6 +505,51 @@ public class PageStepDefsAndroid extends BasePageAndroid {
 
     @Then("l'utilisateur devrait voir les informations du capteur")
     public void lUtilisateurDevraitVoirLesInformationsDuCapteur() {
+    }
+
+    @When("Je sélectionne {string} puis {string}")
+    public void jeSelectionnePuis(String textExpected1, String textExpected2) throws MalformedURLException, InterruptedException {
+
+         overkiz.btnEnPlus.click();
+         Thread.sleep(1000);
+         scrollUp(overkiz.btnNotification,-40);
+
+         manager.clickOnElement("tv_log_out");
+
+
+
+
+    }
+
+    @Then("On est sur la page de connexion de l’application")
+    public void onEstSurLaPageDeConnexionDeLApplication() {
+        System.out.println();
+    }
+
+    @And("Je choisis un serveur parmi:")
+    public void jeChoisisUnServeurParmi() {
+        System.out.println();
+
+    }
+
+    @And("Je renseigne le numéro du serveur dans le champ dédié")
+    public void jeRenseigneLeNumeroDuServeurDansLeChampDedie() {
+        System.out.println();
+    }
+
+    @And("Je clique sur {string}")
+    public void jeCliqueSur(String arg0) {
+        System.out.println();
+    }
+
+    @Then("L’application pointe sur le serveur sélectionné")
+    public void lApplicationPointeSurLeServeurSelectionne() {
+        System.out.println();
+    }
+
+    @And("L'écran de connexion est de nouveau visible")
+    public void lEcranDeConnexionEstDeNouveauVisible() {
+        System.out.println();
     }
 }
 

@@ -6,13 +6,15 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import java.net.MalformedURLException;
+
 import static utils.Driver.getDriver;
 
 
 public class OverkizPages {
 
 
-    public OverkizPages() {
+    public OverkizPages() throws MalformedURLException, InterruptedException {
 
         PageFactory.initElements(new AppiumFieldDecorator(getDriver()), this);
 
@@ -92,6 +94,9 @@ public class OverkizPages {
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Mes informations personnelles\"]")
     public WebElement btnMesInformations;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Changer de mot de passe\"]")
+    public WebElement btnchangerMotDePasse;
 
 
     @AndroidFindBy(xpath = "(//android.widget.EditText)[1]")
@@ -185,6 +190,10 @@ public class OverkizPages {
 
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_valide")
     public WebElement btnCréer;
+
+    @AndroidFindBy(xpath = "(//android.widget.TextView)[3]")
+    public WebElement btnNotification;
+
 
 
 }
