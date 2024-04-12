@@ -9,7 +9,6 @@ import utils.Driver;
 import java.net.MalformedURLException;
 import java.util.*;
 
-import static utils.Driver.getDriver;
 import static utils.Driver.quitDriver;
 
 public class Hooks {

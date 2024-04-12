@@ -20,12 +20,11 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Random;
 import static org.junit.Assert.*;
-import static org.openqa.selenium.devtools.v115.profiler.Profiler.stop;
+
 import static utils.Driver.getDriver;
 
 public class PageStepDefsAndroid extends BasePage {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PageStepDefsAndroid.class);
     OverkizPages overkiz = new OverkizPages();
     Actions actions = new Actions(getDriver());
     Faker faker = new Faker();
