@@ -21,7 +21,6 @@ pipeline {
                 }
             }
         }
-
         stage('Start Appium Server') {
             steps {
                 script {
