@@ -32,7 +32,7 @@ pipeline {
         stage('Run Cucumber Tests') {
             steps {
                 echo 'Running Cucumber tests...'
-                sh 'mvn clean test'
+                sh 'mvn test'
             }
         }
         stage('Deploy') {
