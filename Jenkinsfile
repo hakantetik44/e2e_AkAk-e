@@ -8,7 +8,7 @@ pipeline {
                     echo 'Installing dependencies...'
                     sh 'brew update'
                     sh 'brew install maven'
-                    sh 'brew install openjdk@17'
+                    sh 'brew install openjdk@8'
                     sh 'npm install -g appium'
                 }
             }
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running Cucumber tests...'
-                    sh 'mvn test -Dcucumber.options="--tags @smoke'
+                    sh 'mvn test -Dcucumber.options="--tags @smoke"'
                 }
             }
         }

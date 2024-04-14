@@ -133,8 +133,11 @@
                     <forkCount>3</forkCount>
                     <reuseForks>true</reuseForks>
                     <includes>
-                        <include>TestRunner.java</include>
-                    </includes>
+                    <include>**/Test*.java</include>
+                    <include>**/*Test.java</include>
+                    <include>**/*TestCase.java</include>
+                    <include>**/TestRunner.java</include>
+                </includes>
                 </configuration>
             </plugin>
             <plugin>
