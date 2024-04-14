@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-            JAVA_HOME = '/usr/local/opt/openjdk@17'
-            PATH = "/usr/local/opt/openjdk@17/bin:${env.PATH}"
-        }
-
     stages {
         stage('Install Dependencies') {
             steps {
