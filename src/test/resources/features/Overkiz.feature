@@ -1,6 +1,5 @@
 @smoke
 Feature: Se connecter à overkiz
-
   @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android @APPSV2-1128
   Scenario Outline:Tentative de connexion avec succes
     Given lutilisateur souhaite se connecter à l'application
