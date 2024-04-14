@@ -160,6 +160,7 @@ Feature: Se connecter à overkiz
       | @wisniowskiAndroid  |
       | @flexomV3Android    |
 
+
   @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android
   Scenario Outline: Gérer la connexion et accéder au menu caché
     Given l'utilisateur est sur lécran daccueil
