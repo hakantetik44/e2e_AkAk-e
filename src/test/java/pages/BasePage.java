@@ -1,6 +1,5 @@
 package pages;
 
-
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.PerformsTouchActions;
@@ -12,10 +11,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.net.MalformedURLException;
 import java.time.Duration;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.PointOption.point;
@@ -232,8 +231,41 @@ public class BasePage {
         }
     }
 
+    public void addAppOperationManager(WebDriver driver) {
+        List<String> appNames = new ArrayList<>(Arrays.asList("wisniowski", "hexaom", "flexomv3", "kizconnect"));
 
+        for (String variable : appNames) {
+            for (String appName : appNames) {
+                setImplicitlyWait(1);
+                String locator = "com.overkiz." + appName + ":id/" + variable;
+                WebElement element = findElementIfExists(locator);
+                if (element != null) {
+                    element.click();
+                    resetImplicitlyWait();
+                    return;
+                }
+            }
+        }
+        resetImplicitlyWait();
+    }
+
+    public WebElement findElementIfExists(String locator) {
+        try {
+            return driver.findElement(By.id(locator));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private void setImplicitlyWait(int seconds) {
+        driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+    }
+
+    private void resetImplicitlyWait() {
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    }
 }
+
 
 
 
