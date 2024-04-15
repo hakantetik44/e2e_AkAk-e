@@ -17,6 +17,7 @@ public class AppOperationManager {
         this.driver = driver;
         addAppNames(new String[]{"wisniowski", "hexaom", "flexomv3", "kizconnect"});
     }
+
     public void addAppNames(String[] newAppNames) {
         appNames.addAll(Arrays.asList(newAppNames));
     }
@@ -29,17 +30,37 @@ public class AppOperationManager {
             if (element != null) {
                 element.click();
                 resetImplicitlyWait();
-                return;}}
+                return;
+            }
+        }
         resetImplicitlyWait();
     }
+
     public WebElement findElementIfExists(String locator) {
         try {
             return driver.findElement(By.id(locator));
         } catch (Exception e) {
-            return null;}}
-    private void setImplicitlyWait(int seconds) {
-        driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);}
+            return null;
+        }
+    }
 
+    private void setImplicitlyWait(int seconds) {
+        driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+    }
     private void resetImplicitlyWait() {
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);}
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    }
+    public boolean verifyElementText(String variable, String expectedText) {
+        for (String appName : appNames) {
+            setImplicitlyWait(1);
+            String locator = "com.overkiz." + appName + ":id/" + variable;
+            WebElement element = findElementIfExists(locator);
+            if (element != null) {
+                String actualText = element.getText();
+                resetImplicitlyWait();
+                return actualText.equals(expectedText);}
+        }
+        resetImplicitlyWait();
+        return false;
+    }
 }

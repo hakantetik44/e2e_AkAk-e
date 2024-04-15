@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running Cucumber tests...'
-                    sh 'mvn test -Dcucumber.options="--tags @smoke"'
+                    sh 'mvn test'
                 }
             }
         }

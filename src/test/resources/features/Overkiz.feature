@@ -20,6 +20,7 @@ Feature: Se connecter à overkiz
     When il accède à l'application Overkiz
     And l'utilisateur saisit son adresse e-mail valide
     Then si l'utilisateur saisit une adresse e-mail invalide
+    And un message d'erreur saffiche correctement
     Examples:
       | tag                 |
       | @kizconnectAndroid  |

@@ -51,7 +51,6 @@ public class Driver {
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);}
                     break;
-
                 case "IOS":
                     iosOptions = new XCUITestOptions();
                     iosOptions.XCODE_ORG_ID_OPTION.contains("somfy.test.auto@gmail.com" );

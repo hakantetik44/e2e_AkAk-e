@@ -9,13 +9,10 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pages.AppOperationManager;
 import pages.BasePage;
 import pages.OverkizPages;
 import utils.ConfigReader;
-
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Random;
@@ -83,11 +80,20 @@ public class PageStepDefsAndroid extends BasePage {
     }
 
     @And("un message d'erreur saffiche correctement")
-    public void unMessageDErreurSafficheCorrectement() {
-        //overkiz.btnSeConnecter.click();
+    public void unMessageDErreurSafficheCorrectement() throws InterruptedException {
+        if (!overkiz.btnSeConnecter.isEnabled()) {
+            overkiz.btnSeConnecter.click();
+        }
         String textMessageDerruer = "Le processus d'authentification a échoué à cause d'un problème avec le compte (désactivé, expiré, …)";
-        assertTrue(overkiz.invalidSnackbarText.getText().contains(textMessageDerruer));
-        System.out.println(overkiz.invalidSnackbarText.getText());
+
+        if (manager.verifyElementText("snackbar_text", textMessageDerruer)) {
+            assertTrue(true);
+        } else if (overkiz.invalidSnackbarText.getText().contains(textMessageDerruer)) {
+            assertTrue(true);
+        } else {
+            fail();
+        }
+
 
     }
 
@@ -97,10 +103,7 @@ public class PageStepDefsAndroid extends BasePage {
         overkiz.getPlaceHolderMotDePasseText.sendKeys("invalideAdressseEmail");
         overkiz.btnSeConnecter.click();
         String textMessageDerruer = "Le processus d'authentification a échoué à cause d'un problème avec le compte (désactivé, expiré, …)";
-        assertTrue(overkiz.invalidSnackbarText.getText().contains(textMessageDerruer));
-        System.out.println(overkiz.invalidSnackbarText.getText());
-        System.out.println("textMessageDerruer + overkiz.invalidSnackbarText.getText() = " +"actual"+ textMessageDerruer + overkiz.invalidSnackbarText.getText());
-
+        assert manager.verifyElementText("snackbar_text",textMessageDerruer);
     }
 
     @And("l'utilisateur laisse le champ dadresse e-mail vide")
@@ -115,8 +118,7 @@ public class PageStepDefsAndroid extends BasePage {
         overkiz.placeHolderEmail.sendKeys("");
         overkiz.btnSeConnecter.click();
         String textMessageDerruer = "Le processus d'authentification a échoué à cause d'un problème avec le compte (désactivé, expiré, …)";
-        assertTrue(overkiz.invalidSnackbarText.getText().contains(textMessageDerruer));
-        System.out.println(overkiz.invalidSnackbarText.getText());
+        assert manager.verifyElementText("snackbar_text",textMessageDerruer);
     }
 
     @Given("lutilisateur souhaite vérifier les éléments sur la page d'accueil")
@@ -127,7 +129,7 @@ public class PageStepDefsAndroid extends BasePage {
     @Then("les éléments de la page d'accueil sont vérifiés conformément aux spécifications")
     public void lesElementsDeLaPageDAccueilSontVerifiesConformementAuxSpecifications() throws InterruptedException, MalformedURLException {
         overkiz.btnSeConnecter.click();
-        Thread.sleep(2000);
+      wait(2);
         List<WebElement> elementList = getDriver().findElements(By.className("android.widget.TextView"));
         // Parcourons la liste pour valider les textes
         String[] textsToVerify = {
@@ -187,7 +189,7 @@ public class PageStepDefsAndroid extends BasePage {
     public void lUtilisateurPeutVerifierSesInformationsPersonnelles() throws InterruptedException, MalformedURLException {
         overkiz.btnEnPlus.click();
         overkiz.btnMesInformations.click();
-        Thread.sleep(3000);
+      wait(2);
         List<WebElement> elementList2 = getDriver().findElements(By.className("android.widget.TextView"));
         String[] textsToVerify2 = {
                 "Prénom",
@@ -250,20 +252,20 @@ public class PageStepDefsAndroid extends BasePage {
         overkiz.btnEnPlus.click();
         overkiz.btnMesInformations.click();
         overkiz.placePrénom.click();
-        Thread.sleep(1000);
+      wait(1);
         overkiz.placeHolderMesInformations.clear();
         overkiz.placeHolderMesInformations.sendKeys(getRandomName());
         overkiz.tvOk.click();
-        Thread.sleep(1000);
+      wait(1);
         //assertTrue(overkiz.snackbarText.getText().contains("Votre profil a été mis à jour"));
         overkiz.placeNom.click();
-        Thread.sleep(1000);
+      wait(1);
         overkiz.placeHolderMesInformations.clear();
         overkiz.placeHolderMesInformations.sendKeys(getRandomName());
         overkiz.tvOk.click();
        // assertTrue(overkiz.snackbarText.getText().contains("Votre profil a été mis à jour"));
         overkiz.placeTéléphone.click();
-        Thread.sleep(1000);
+      wait(1);
         overkiz.placeHolderMesInformations.clear();
         overkiz.placeHolderMesInformations.sendKeys(getRandomPhoneNumber());
         overkiz.tvOk.click();
@@ -271,17 +273,17 @@ public class PageStepDefsAndroid extends BasePage {
         overkiz.placeAdresse.click();
         overkiz.btnAutoriser.click();
         overkiz.btnModifier.click();
-        Thread.sleep(1000);
+      wait(1);
         overkiz.placeHolderAdresse.clear();
         String adresse = faker.address().fullAddress();
         overkiz.placeHolderAdresse.sendKeys(adresse);
         overkiz.placeHolderCodePostal.clear();
         overkiz.placeHolderCodePostal.sendKeys(getRandomPostalCode());
         overkiz.getTvOk.click();
-        Thread.sleep(1000);
+      wait(1);
      //   assertTrue(overkiz.snackbarText.getText().contains("Votre profil a été mis à jour"));
         overkiz.placeEmail.click();
-        Thread.sleep(1000);
+      wait(1);
         overkiz.placeHolderMesInformations.clear();
         overkiz.placeHolderMesInformations.sendKeys("vfovk5934@yopmail.com");
         overkiz.tvOk.click();
@@ -318,7 +320,7 @@ public class PageStepDefsAndroid extends BasePage {
         overkiz.placeHolderMotDePasse.click();
         overkiz.getPlaceHolderMotDePasseText.sendKeys(ConfigReader.getProperty("motDePasse"));
         overkiz.btnSeConnecter.click();
-        Thread.sleep(2000);
+      wait(2);
         //assertTrue(overkiz.textBonjourName.getText().contains("Bonjour"));
     }
 
@@ -510,7 +512,7 @@ public class PageStepDefsAndroid extends BasePage {
     public void jeSelectionnePuis(String textExpected1, String textExpected2) throws MalformedURLException, InterruptedException {
 
          overkiz.btnEnPlus.click();
-         Thread.sleep(1000);
+       wait(1);
          scrollUp(overkiz.btnNotification,-40);
          manager.clickOnElement("tv_log_out");
 
