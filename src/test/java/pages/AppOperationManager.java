@@ -63,4 +63,36 @@ public class AppOperationManager {
         resetImplicitlyWait();
         return false;
     }
+
+    public void clearElement(String variable) {
+        for (String appName : appNames) {
+            setImplicitlyWait(1);
+            String locator = "com.overkiz." + appName + ":id/" + variable;
+            WebElement element = findElementIfExists(locator);
+            if (element != null) {
+                element.clear();
+                resetImplicitlyWait();
+                return;
+            }
+        }
+        resetImplicitlyWait();
+    }
+
+    public void sendKeysToElement(String variable, String keysToSend) {
+        for (String appName : appNames) {
+            setImplicitlyWait(1);
+            String locator = "com.overkiz." + appName + ":id/" + variable;
+            WebElement element = findElementIfExists(locator);
+            if (element != null) {
+                if (keysToSend.isEmpty()) {
+                    element.sendKeys("");
+                } else {
+                    element.sendKeys(keysToSend);
+                }
+                resetImplicitlyWait();
+                return;
+            }
+        }
+        resetImplicitlyWait();
+    }
 }

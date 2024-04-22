@@ -1,5 +1,20 @@
-@smoke
+@smokeAndroid
 Feature: Se connecter à overkiz
+
+  @kizconnectAndroid @flexomV3Android @hexaconnectAndroid   @APPSV2-1133
+  Scenario Outline: Vérification des informations personnelles pour Android
+    Given l'utilisateur souhaite vérifier ses informations personnelles
+    When il accède à l'application Overkiz avec ses informations de connexion
+    Then l'utilisateur peut vérifier ses informations personnelles
+    Examples:
+      | tag                |
+      | @kizconnectAndroid |
+      | @flexomV3Android   |
+      | @hexaconnectAndroid |
+
+
+
+
   @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android @APPSV2-1128
   Scenario Outline:Tentative de connexion avec succes
     Given lutilisateur souhaite se connecter à l'application
@@ -14,86 +29,10 @@ Feature: Se connecter à overkiz
       | @wisniowskiAndroid  |
       | @flexomV3Android    |
 
-  @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android  @APPSV2-1129
-  Scenario Outline: Tentative de connexion avec une adresse e-mail invalide
-    Given lutilisateur souhaite se connecter à l'application
-    When il accède à l'application Overkiz
-    And l'utilisateur saisit son adresse e-mail valide
-    Then si l'utilisateur saisit une adresse e-mail invalide
-    And un message d'erreur saffiche correctement
-    Examples:
-      | tag                 |
-      | @kizconnectAndroid  |
-      | @hexaconnectAndroid |
-      | @wisniowskiAndroid  |
-      | @flexomV3Android    |
 
 
-  @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android  @APPSV2-1130
-  Scenario Outline: Tentative de connexion avec un mot de passe invalide
-    Given lutilisateur souhaite se connecter à l'application
-    When il accède à l'application Overkiz
-    And l'utilisateur saisit son adresse e-mail valide
-    Then si l'utilisateur saisit un mot de passe invalide
-    And un message d'erreur saffiche correctement
-    Examples:
-      | tag                 |
-      | @kizconnectAndroid  |
-      | @hexaconnectAndroid |
-      | @wisniowskiAndroid  |
-      | @flexomV3Android    |
 
-  @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android   @APPSV2-1131
-   Scenario Outline: Tentative de connexion avec les champs vide
-    Given lutilisateur souhaite se connecter à l'application
-    When il accède à l'application Overkiz
-    And l'utilisateur laisse le champ dadresse e-mail vide
-    Then l'utilisateur laisse le champ du mot de passe vide
-    And un message d'erreur saffiche correctement
-    Examples:
-      | tag                 |
-      | @kizconnectAndroid  |
-      | @hexaconnectAndroid |
-      | @wisniowskiAndroid  |
-      | @flexomV3Android    |
 
-  @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android  @APPSV2-1132
-  Scenario Outline: Vérification des éléments sur la page d'accueil
-    Given lutilisateur souhaite vérifier les éléments sur la page d'accueil
-    When il accède à l'application Overkiz
-    Then  l'utilisateur saisit ses informations de connexion
-    And les éléments de la page d'accueil sont vérifiés conformément aux spécifications
-    Examples:
-      | tag                 |
-      | @kizconnectAndroid  |
-      | @hexaconnectAndroid |
-      | @wisniowskiAndroid  |
-      | @flexomV3Android    |
-
-  @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android  @APPSV2-1133
-  Scenario Outline: Vérification des informations personnelles pour Android
-    Given l'utilisateur souhaite vérifier ses informations personnelles
-    When il accède à l'application Overkiz avec ses informations de connexion
-    Then l'utilisateur peut vérifier ses informations personnelles
-    Examples:
-      | tag                 |
-      | @kizconnectAndroid  |
-      | @hexaconnectAndroid |
-      | @wisniowskiAndroid  |
-      | @flexomV3Android    |
-
-  @kizconnectAndroid  @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android @APPSV2-1134
-  Scenario Outline:  Modifications des informations personnelles pour Android
-    Given l'utilisateur souhaite modifier ses informations personnelles
-    When il accède à l'application Overkiz avec ses informations de connexion
-    Then l'utilisateur peut modifier ses informations personnelles
-    And l'utilisateur ne peut pas modifier certaines informations
-    Examples:
-      | tag                 |
-      | @kizconnectAndroid  |
-      | @hexaconnectAndroid |
-      | @wisniowskiAndroid  |
-      | @flexomV3Android    |
 
   @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android@APPSV2-1135
   Scenario Outline: Planification via la géolocalisation
@@ -117,6 +56,22 @@ Feature: Se connecter à overkiz
       | @hexaconnectAndroid |
       | @wisniowskiAndroid  |
       | @flexomV3Android    |
+
+
+  @kizconnectAndroid @hexaconnectAndroid @flexomV3Android @APPSV2-1134
+  Scenario Outline:  Modifications des informations personnelles pour Android
+    Given l'utilisateur souhaite modifier ses informations personnelles
+    When il accède à l'application Overkiz avec ses informations de connexion
+    Then l'utilisateur peut modifier ses informations personnelles
+    And l'utilisateur ne peut pas modifier certaines informations
+    Examples:
+      | tag                 |
+      | @kizconnectAndroid  |
+      | @hexaconnectAndroid |
+      | @flexomV3Android    |
+
+
+
   @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android @APPSV2-1136
   Scenario Outline: Gestion des scénarios - Modifications
     Given  l'utilisateur est sur lécran daccueil
