@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
                 "utils.formatter.PrettyReports:target/cucumber-pretty-reports"},
         features = "src/test/resources/features",
         glue = "stepdefinitions",
-        tags = "@APPSV2-1130",
+        tags = "@smokeAndroid",
         dryRun = false
 )
 public class TestRunner {

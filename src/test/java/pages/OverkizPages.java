@@ -3,6 +3,7 @@ package pages;
 
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -64,7 +65,7 @@ public class OverkizPages {
     @AndroidFindBy(xpath = "(//android.widget.TextView)[1]")
     public WebElement textBonjourName;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/snackbar_text")
+    @AndroidFindBy(xpath = "(//android.widget.TextView)[7]")
     public WebElement invalidSnackbarText;
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Logement\"]")
@@ -114,24 +115,22 @@ public class OverkizPages {
     @AndroidFindBy(xpath = "(//android.widget.EditText)[5]")
     public WebElement placeAdresse;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_update")
+    @AndroidFindBy(xpath = "(//android.widget.TextView)[3]")
     public WebElement btnModifier;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/et_email")
+    @AndroidFindBy(xpath = "(//android.widget.EditText)[1]")
     public WebElement placeHolderMesInformations;
 
-    @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
+    @AndroidFindBy(xpath = "(//android.widget.Button)[1]")
     public WebElement btnAutoriser;
     @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_always_button")
     public WebElement btnAutoriserToujours;
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/snackbar_text")
     public WebElement snackbarText;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/edit_text_address")
-    public WebElement placeHolderAdresse;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/edit_text_code_postal")
-    public WebElement placeHolderCodePostal;
+
+
 
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/edit_text_city")
     public WebElement placeHolderVille;
@@ -193,6 +192,10 @@ public class OverkizPages {
 
     @AndroidFindBy(xpath = "(//android.widget.TextView)[3]")
     public WebElement btnNotification;
+
+    @iOSXCUITFindBy(iOSNsPredicate = "name == \"ic_login_logo\"")
+    public WebElement logoOvezKizIos;
+
 
 
 

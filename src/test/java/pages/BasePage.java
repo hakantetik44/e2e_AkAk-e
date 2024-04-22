@@ -125,15 +125,6 @@ public class BasePage {
     }
 
 
-    public static void scroll(WebElement element, String direction) throws MalformedURLException, InterruptedException {
-
-        ((JavascriptExecutor) getDriver()).executeScript("mobile: scrollGesture",
-                ImmutableMap.of(
-                        "elementId", ((RemoteWebElement) element).getId(),
-                        "direction", direction.toLowerCase(),
-                        "percent", 3
-                ));
-    }
 
     public Map<String, String> frDayMap = new HashMap<String, String>() {{
         put("Lun.", "01");
@@ -160,6 +151,19 @@ public class BasePage {
     public boolean cliquerLogoOverKizConnectSixFois(Actions actions, WebElement logoOverKizConnect) {
         try {
             for (int i = 0; i < 6; i++) {
+                actions.click(logoOverKizConnect);
+            }
+            actions.perform();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean cliquerLogoOverKizConnectSeptFois(Actions actions, WebElement logoOverKizConnect) {
+        try {
+            for (int i = 0; i < 7; i++) {
                 actions.click(logoOverKizConnect);
             }
             actions.perform();
