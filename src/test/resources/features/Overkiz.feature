@@ -1,41 +1,22 @@
 @smokeAndroid
 Feature: Se connecter à overkiz
 
-  @kizconnectAndroid @flexomV3Android @hexaconnectAndroid   @APPSV2-1133
-  Scenario Outline: Vérification des informations personnelles pour Android
+  @kizconnect @flexomV3 @hexaconnect  @APPSV2-1133
+  Scenario: Vérification des informations personnelles pour Android
     Given l'utilisateur souhaite vérifier ses informations personnelles
     When il accède à l'application Overkiz avec ses informations de connexion
     Then l'utilisateur peut vérifier ses informations personnelles
-    Examples:
-      | tag                |
-      | @kizconnectAndroid |
-      | @flexomV3Android   |
-      | @hexaconnectAndroid |
 
-
-
-
-  @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android @APPSV2-1128
-  Scenario Outline:Tentative de connexion avec succes
+  @kizconnect @hexaconnect @wisniowski @flexomV3 @APPSV2-1128
+  Scenario:Tentative de connexion avec succes
     Given lutilisateur souhaite se connecter à l'application
     When il accède à l'application Overkiz
     And utilisateur voit les champs "Adresse E-mail" And "Mot de passe" sur la page d'accueil
     Then  l'utilisateur saisit ses informations de connexion
     And l'utilisateur se connecte à son compte
-    Examples:
-      | tag                 |
-      | @kizconnectAndroid  |
-      | @hexaconnectAndroid |
-      | @wisniowskiAndroid  |
-      | @flexomV3Android    |
 
-
-
-
-
-
-  @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android@APPSV2-1135
-  Scenario Outline: Planification via la géolocalisation
+  @kizconnect @hexaconnect @wisniowski @flexomV3 @APPSV2-1135
+  Scenario: Planification via la géolocalisation
     Given l'utilisateur est sur lécran daccueil
     When l'utilisateur sélectionne le "Scénarios" pour la géolocalisation
     And l'utilisateur clique sur Géolocaliser
@@ -50,45 +31,27 @@ Feature: Se connecter à overkiz
     When l'utilisateur clique sur Activer une fois après avoir ajusté la distance
     And l'utilisateur clique sur Enregistrer
     Then l'utilisateur vérifie dans linterface dadministration que la planification est prise en compte dans le menu
-    Examples:
-      | tag                 |
-      | @kizconnectAndroid  |
-      | @hexaconnectAndroid |
-      | @wisniowskiAndroid  |
-      | @flexomV3Android    |
 
 
-  @kizconnectAndroid @hexaconnectAndroid @flexomV3Android @APPSV2-1134
-  Scenario Outline:  Modifications des informations personnelles pour Android
+  @kizconnect @hexaconnect @flexomV3 @APPSV2-1134
+  Scenario:  Modifications des informations personnelles pour Android
     Given l'utilisateur souhaite modifier ses informations personnelles
     When il accède à l'application Overkiz avec ses informations de connexion
     Then l'utilisateur peut modifier ses informations personnelles
     And l'utilisateur ne peut pas modifier certaines informations
-    Examples:
-      | tag                 |
-      | @kizconnectAndroid  |
-      | @hexaconnectAndroid |
-      | @flexomV3Android    |
 
-
-
-  @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android @APPSV2-1136
-  Scenario Outline: Gestion des scénarios - Modifications
+  @kizconnect @hexaconnect @wisniowski @flexomV3 @APPSV2-1136
+  Scenario: Gestion des scénarios - Modifications
     Given  l'utilisateur est sur lécran daccueil
     When  l'utilisateur clique sur "Gérer mes accès secondaires" dans longlet "En plus"
     And  il saisi l'adresse e-mail et le mot de passe du compte secondaire
     And  il clique sur le bouton "Créer" en bas
     Then l'accès secondaire est créé
     And  un écran récapitulatif des comptes secondaires existants apparaît
-    Examples:
-      | tag                 |
-      | @kizconnectAndroid  |
-      | @hexaconnectAndroid |
-      | @wisniowskiAndroid  |
-      | @flexomV3Android    |
 
-  @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android @APPSV2-445
-  Scenario Outline: Piloter un équipement depuis l'écran d'exploitation
+
+  @kizconnect @hexaconnect @wisniowski  @flexomV3 @APPSV2-445
+  Scenario : Piloter un équipement depuis l'écran d'exploitation
     Given  l'utilisateur est sur lécran daccueil
     When l'utilisateur navigue dans les pièces pour choisir léquipement à piloter
     And l'utilisateur devrait être redirigé vers lécran dexploitation
@@ -109,16 +72,10 @@ Feature: Se connecter à overkiz
     When l'utilisateur lit les informations du capteur
     Then l'utilisateur devrait voir les informations du capteur
 
-    Examples:
-      | tag                 |
-      | @kizconnectAndroid  |
-      | @hexaconnectAndroid |
-      | @wisniowskiAndroid  |
-      | @flexomV3Android    |
 
 
-  @kizconnectAndroid @hexaconnectAndroid @wisniowskiAndroid @flexomV3Android
-  Scenario Outline: Gérer la connexion et accéder au menu caché
+  @kizconnect @hexaconnect @wisniowski @flexomV3
+  Scenario: Gérer la connexion et accéder au menu caché
     Given l'utilisateur est sur lécran daccueil
     When Je sélectionne "En plus" puis "Déconnexion"
     Then On est sur la page de connexion de l’application
@@ -128,9 +85,3 @@ Feature: Se connecter à overkiz
     And Je clique sur "OK"
     Then L’application pointe sur le serveur sélectionné
     And L'écran de connexion est de nouveau visible
-    Examples:
-      | tag                 |
-      | @kizconnectAndroid  |
-      | @hexaconnectAndroid |
-      | @wisniowskiAndroid  |
-      | @flexomV3Android    |

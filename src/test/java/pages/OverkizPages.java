@@ -201,6 +201,8 @@ public class OverkizPages {
     public By
         buttonNavMore = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/nav_more") : By.id("finishFooter");
 
+
+
     public static String getAppName(String app){
         switch (app){
             case "kizconnect.apk":

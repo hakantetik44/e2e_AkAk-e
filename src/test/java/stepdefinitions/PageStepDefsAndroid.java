@@ -251,6 +251,7 @@ public class PageStepDefsAndroid extends BasePage {
         getCurrentDriver(),
         getCurrentDriver(),
         overkiz.buttonNavMore
+
     );
 
     @Then("l'utilisateur peut modifier ses informations personnelles")
