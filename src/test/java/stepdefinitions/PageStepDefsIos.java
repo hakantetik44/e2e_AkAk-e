@@ -34,10 +34,6 @@ public class PageStepDefsIos extends BasePage {
         wait(2);
         cliquerLogoOverKizConnectSeptFois(actions,overkiz.logoOvezKizIos);
         wait(2);
-
-
-
-
     }
 
     @Given("pause")
