@@ -1,14 +1,12 @@
 package pages;
 
 import com.google.common.collect.ImmutableMap;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.net.MalformedURLException;
@@ -25,8 +23,8 @@ import static utils.Driver.getCurrentDriver;
 public class BasePage {
 
     private static final Logger LOG = LoggerFactory.getLogger(BasePage.class);
-    private org.openqa.selenium.WebDriver driver;
-    public static void scrollToTop(AppiumDriver driver, int x, int y) throws InterruptedException, MalformedURLException {
+
+    public static void scrollToTop(int x, int y) throws InterruptedException, MalformedURLException {
         TouchAction touch = new TouchAction((PerformsTouchActions) getCurrentDriver());
         touch.press(PointOption.point(x, y))
                 .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
@@ -48,9 +46,9 @@ public class BasePage {
                 .perform();
 
     }
-    public void scrollFromButtomToUp(AppiumDriver driver) throws InterruptedException, MalformedURLException {
+    public void scrollFromButtomToUp() throws InterruptedException, MalformedURLException {
 
-        Dimension dimension = driver.manage().window().getSize();
+        Dimension dimension = getCurrentDriver().manage().window().getSize();
         int start_x = (int) (dimension.width * 0.5);
         int start_y = (int) (dimension.height * 0.8);
         int end_x = (int) (dimension.width * 0.5);
@@ -59,10 +57,9 @@ public class BasePage {
         TouchAction touch = new TouchAction((PerformsTouchActions) getCurrentDriver());
         touch.press(point(start_x, start_y)).waitAction(waitOptions(Duration.ofSeconds(1))).moveTo(point(end_x, end_y)).release().perform();
         Thread.sleep(3000);
-
     }
 
-    public void scrollFromUpToButtom(AppiumDriver driver) throws InterruptedException, MalformedURLException {
+    public void scrollFromUpToButtom() throws InterruptedException, MalformedURLException {
 
         Dimension dimension = getCurrentDriver().manage().window().getSize();
         int start_x = (int) (dimension.width * 0.2);
@@ -75,9 +72,9 @@ public class BasePage {
         Thread.sleep(3000);
     }
 
-    public void scrollDown(AppiumDriver driver) throws InterruptedException, MalformedURLException {
+    public void scrollDown() throws InterruptedException, MalformedURLException {
 
-        Dimension dimension = driver.manage().window().getSize();
+        Dimension dimension = getCurrentDriver().manage().window().getSize();
         int start_x = (int) (dimension.width * 0.5);
         int start_y = (int) (dimension.height * 0.5);
 
@@ -231,7 +228,7 @@ public class BasePage {
 
     public void cliquerSurLocatorEtPoint(By locator, int y) {
         try {
-            WebElement element = driver.findElement(locator);
+            WebElement element = getCurrentDriver().findElement(locator);
 
             int x = element.getLocation().getX();
 
@@ -265,18 +262,18 @@ public class BasePage {
 
     public WebElement findElementIfExists(String locator) {
         try {
-            return driver.findElement(By.id(locator));
+            return getCurrentDriver().findElement(By.id(locator));
         } catch (Exception e) {
             return null;
         }
     }
 
     private void setImplicitlyWait(int seconds) {
-        driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+        getCurrentDriver().manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
     }
 
     private void resetImplicitlyWait() {
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        getCurrentDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     }
 }
 
