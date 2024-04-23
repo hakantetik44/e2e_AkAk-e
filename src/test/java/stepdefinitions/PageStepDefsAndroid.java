@@ -16,19 +16,19 @@ import utils.ConfigReader;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Random;
+import utils.Driver;
 
 import static org.junit.Assert.*;
 
-import static utils.Driver.getDriver;
 
 public class PageStepDefsAndroid extends BasePage {
 
     OverkizPages overkiz = new OverkizPages();
-    Actions actions = new Actions(getDriver());
+    Actions actions = new Actions(Driver.getCurrentDriver());
     Faker faker = new Faker();
 
     Random random = new Random();
-    AppOperationManager manager = new AppOperationManager(getDriver());
+    AppOperationManager manager = new AppOperationManager(Driver.getCurrentDriver());
 
     public PageStepDefsAndroid() throws MalformedURLException, InterruptedException {
     }
@@ -128,7 +128,7 @@ public class PageStepDefsAndroid extends BasePage {
     public void lesElementsDeLaPageDAccueilSontVerifiesConformementAuxSpecifications() throws InterruptedException, MalformedURLException {
         overkiz.btnSeConnecter.click();
         wait(2);
-        List<WebElement> elementList = getDriver().findElements(By.className("android.widget.TextView"));
+        List<WebElement> elementList = Driver.getCurrentDriver().findElements(By.className("android.widget.TextView"));
         // Parcourons la liste pour valider les textes
         String[] textsToVerify = {
                 "Android vide",
@@ -189,7 +189,7 @@ public class PageStepDefsAndroid extends BasePage {
         overkiz.btnEnPlus.click();
         overkiz.btnMesInformations.click();
         wait(2);
-        List<WebElement> elementList2 = getDriver().findElements(By.className("android.widget.TextView"));
+        List<WebElement> elementList2 = Driver.getCurrentDriver().findElements(By.className("android.widget.TextView"));
         String[] textsToVerify2 = {
                 "Prénom",
                 "Nom",
@@ -217,7 +217,7 @@ public class PageStepDefsAndroid extends BasePage {
 
         scrollUp(overkiz.placeEmail, -50);
 
-        List<WebElement> elementList3 = getDriver().findElements(By.className("android.widget.TextView"));
+        List<WebElement> elementList3 = Driver.getCurrentDriver().findElements(By.className("android.widget.TextView"));
         String[] textsToVerify3 = {
                 "Coordonnées GPS",
                 "Lever de soleil / Coucher de soleil",

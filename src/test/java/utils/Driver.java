@@ -3,102 +3,82 @@ import static stepdefinitions.Hooks.bundleId;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.options.BaseOptions;
 import stepdefinitions.Hooks;
 
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.Duration;
-
-
 
 
 public class Driver {
     private Driver() {
     }
-    private static UiAutomator2Options options;
-    public static AppiumDriver appiumDriver;
+    public static IOSDriver iOS;
+    public static AndroidDriver Android;
 
-    public static AppiumDriver getDriver() {
+    public static BaseOptions getAndroidApps(){
+        BaseOptions options = new BaseOptions()
+            .amend("appium:platformeVersion", "12")
+            .amend("appium:deviceName", "R5CT4308RMB")
+            .amend("appium:automationName", "UiAutomator2")
+            .amend("appium:udid", "RF8N92CM2GM")
+            .amend("appium:noReset", true)
+            .amend("appium:wdaLocalPort", "7100")
+            .amend("appium:platformName", "Android")
+            .amend("appium:app", "/Users/nicola/Documents/GitLab/e2e_overkiz/src/test/resources/Apps/" + Hooks.apk)
+            .amend("appium:connectHardwareKeyboard", true)
+            .amend("appium:appWaitPackage", Hooks.getAppPackage(Hooks.apk))
+            .amend("appium:newCommandTimeout", 3600);
+        return options;
+    }
 
-        if (appiumDriver== null) {
-            switch (ConfigReader.getProperty("platformName")) {
-                case "Android":
-                    String appUrl=System.getProperty("user.dir")
-                            + File.separator +"src"
-                            + File.separator +"test"
-                            + File.separator +"resources"
-                            + File.separator +"Apps"
-                            + File.separator + Hooks.apk;
-                    System.out.println("appUrl = " + appUrl);
-                    options = new UiAutomator2Options()
-                            .setAutomationName(ConfigReader.getProperty("automationName"))
-                            .setPlatformVersion(ConfigReader.getProperty("platformVersion"))
-                            .setDeviceName(ConfigReader.getProperty("deviceName"))
-                            //.setAppActivity("com.bouygues.flexom.views.main.MainActivity")
-                            //  .setAppPackage("com.overkiz.kizconnect")
-                            .setApp(appUrl)
-                            .setNoReset(false)
-                            .setNewCommandTimeout(Duration.ofMinutes(10));
-                    try {
-                        appiumDriver = new AndroidDriver(
-                                new URL("http://127.0.0.1:4723"), options
-                        );
-                    } catch (MalformedURLException e) {
-                        throw new RuntimeException(e);}
-                    break;
-                case "IOS":
-                    System.out.println("bundle ID = ->" + bundleId );
-                    BaseOptions options = new BaseOptions()
-                            .amend("appium:deviceName", "iPhone de Phillipe (2)")
-                            .amend("appium:platformeVersion", "15.8")
-                            .amend("appium:noReset", true)
-                            .amend("appium:automationName", "XCUITest")
-                            .amend("appium:udid", "081e0d0b4ebe6ba46dd0acf2e7b7e3534056bc9f")
-                            .amend("appium:bundleId", bundleId)
-                            .amend("appium:wdaLocalPort", "8100")
-                            .amend("appium:language", "fr")
-                            .amend("appium:locale", "FR")
-                            //.amend("appium:version", "iPhone de Nicolas")
-                            .amend("appium:platformName", "iOS")
-                            .amend("appium:newCommandTimeout", 3600)
-                            .amend("appium:connectHardwareKeyboard", true);
+    public static AndroidDriver getAndroidDriver(BaseOptions capabilities)
+        throws MalformedURLException {
+        URL remoteUrl = new URL("http://127.0.0.1:4723/");
+        return new AndroidDriver(remoteUrl, capabilities);
+    }
 
-                    try {
-                        appiumDriver = new IOSDriver(
-                                new URL("http://127.0.0.1:4723"), options
-                        );
-                    } catch (MalformedURLException e) {
-                        throw new RuntimeException(e);
-                    }
-                    break;
-            }}
-        appiumDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        return appiumDriver;
+    public static BaseOptions getiOSApps(){
+        BaseOptions options = new BaseOptions()
+            .amend("appium:deviceName", "iPhone de Phillipe (2)")
+            .amend("appium:platformeVersion", "15.8")
+            .amend("appium:noReset", true)
+            .amend("appium:automationName", "XCUITest")
+            .amend("appium:udid", "081e0d0b4ebe6ba46dd0acf2e7b7e3534056bc9f")
+            .amend("appium:bundleId", bundleId)
+            .amend("appium:wdaLocalPort", "8100")
+            .amend("appium:language", "fr")
+            .amend("appium:locale", "FR")
+            .amend("appium:platformName", "iOS")
+            .amend("appium:newCommandTimeout", 3600)
+            .amend("appium:connectHardwareKeyboard", true);
+        return options;
+    }
+
+    public static IOSDriver getiOSDriver(BaseOptions Caps) throws MalformedURLException {
+        URL remoteUrl = new URL("http://127.0.0.1:4723/");
+        return new IOSDriver(remoteUrl, Caps);
     }
 
 
-    public static void quitDriver() {
-        if (appiumDriver != null) {
-            appiumDriver.quit();
-            appiumDriver = null;
-        }}
 
-    public static void killApp(String apkPackageName) {
-        if (appiumDriver instanceof IOSDriver) {
-            IOSDriver iosDriver = (IOSDriver) appiumDriver;
-            iosDriver.terminateApp(Hooks.bundleId);
-            iosDriver.quit();
-        } else if (appiumDriver instanceof AndroidDriver) {
-            AndroidDriver androidDriver = (AndroidDriver) appiumDriver;
 
-            androidDriver.quit();
+
+    /**
+     * get driver.
+     *
+     * @return appiumDriver
+     */
+    public static AppiumDriver getCurrentDriver() {
+        if (OS.OS.equals("Android")) {
+            return Android;
+        } else if (OS.OS.equals("iOS")) {
+            return iOS;
+        } else {
+            throw new IllegalStateException("Système d'exploitation non supporté: " + OS.OS);
         }
     }
-
 
 }

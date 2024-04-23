@@ -13,15 +13,14 @@ import utils.ConfigReader;
 
 import java.net.MalformedURLException;
 import java.util.Random;
+import utils.Driver;
 
-import static org.junit.Assert.assertTrue;
-import static utils.Driver.getDriver;
 
 public class PageStepDefsIos extends BasePage {
 
     private static final Logger LOG = LoggerFactory.getLogger(PageStepDefsIos.class);
     OverkizPages overkiz = new OverkizPages();
-    Actions actions = new Actions(getDriver());
+    Actions actions = new Actions(Driver.getCurrentDriver());
     Faker faker = new Faker();
 
     Random random = new Random();
@@ -39,6 +38,11 @@ public class PageStepDefsIos extends BasePage {
 
 
 
+    }
+
+    @Given("pause")
+    public void pause() throws InterruptedException {
+        Thread.sleep(5000);
     }
 }
 
