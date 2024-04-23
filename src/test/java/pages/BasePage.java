@@ -15,10 +15,11 @@ import java.net.MalformedURLException;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import utils.Driver;
 
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.PointOption.point;
-import static utils.Driver.getDriver;
+import static utils.Driver.getCurrentDriver;
 
 
 public class BasePage {
@@ -26,7 +27,7 @@ public class BasePage {
     private static final Logger LOG = LoggerFactory.getLogger(BasePage.class);
     private org.openqa.selenium.WebDriver driver;
     public static void scrollToTop(AppiumDriver driver, int x, int y) throws InterruptedException, MalformedURLException {
-        TouchAction touch = new TouchAction((PerformsTouchActions) getDriver());
+        TouchAction touch = new TouchAction((PerformsTouchActions) getCurrentDriver());
         touch.press(PointOption.point(x, y))
                 .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
                 .moveTo(PointOption.point(x, 0))
@@ -35,12 +36,12 @@ public class BasePage {
     }
 
     private static int calculateOffsetForUpAndDownScroll(int scrollAmount) throws MalformedURLException, InterruptedException {
-        Dimension dimension = getDriver().manage().window().getSize();
+        Dimension dimension = getCurrentDriver().manage().window().getSize();
         return ((scrollAmount * dimension.height) / 100);
     }
 
     public static void scrollUp(WebElement element, int scrollPercentage) throws MalformedURLException, InterruptedException {
-        Actions actions = new Actions(getDriver());
+        Actions actions = new Actions(getCurrentDriver());
         actions.clickAndHold(element)
                 .moveByOffset(0, (calculateOffsetForUpAndDownScroll(scrollPercentage)))
                 .release()
@@ -55,7 +56,7 @@ public class BasePage {
         int end_x = (int) (dimension.width * 0.5);
         int end_y = (int) (dimension.height * 0.5);
 
-        TouchAction touch = new TouchAction((PerformsTouchActions) getDriver());
+        TouchAction touch = new TouchAction((PerformsTouchActions) getCurrentDriver());
         touch.press(point(start_x, start_y)).waitAction(waitOptions(Duration.ofSeconds(1))).moveTo(point(end_x, end_y)).release().perform();
         Thread.sleep(3000);
 
@@ -63,13 +64,13 @@ public class BasePage {
 
     public void scrollFromUpToButtom(AppiumDriver driver) throws InterruptedException, MalformedURLException {
 
-        Dimension dimension = getDriver().manage().window().getSize();
+        Dimension dimension = getCurrentDriver().manage().window().getSize();
         int start_x = (int) (dimension.width * 0.2);
         int start_y = (int) (dimension.height * 0.2);
         int end_x = (int) (dimension.width * 0.2);
         int end_y = (int) (dimension.height * 0.5);
 
-        TouchAction touch = new TouchAction((PerformsTouchActions) getDriver());
+        TouchAction touch = new TouchAction((PerformsTouchActions) getCurrentDriver());
         touch.press(point(start_x, start_y)).waitAction(waitOptions(Duration.ofSeconds(1))).moveTo(point(end_x, end_y)).release().perform();
         Thread.sleep(3000);
     }
@@ -83,14 +84,14 @@ public class BasePage {
         int end_x = (int) (dimension.width * 0.2);
         int end_y = (int) (dimension.height * 0.2);
 
-        TouchAction touch = new TouchAction((PerformsTouchActions) getDriver());
+        TouchAction touch = new TouchAction((PerformsTouchActions) getCurrentDriver());
         touch.press(point(start_x, start_y)).waitAction(waitOptions(Duration.ofSeconds(1))).moveTo(point(end_x, end_y)).release().perform();
         Thread.sleep(3000);
     }
 
 
     public void performSwipe(int x, int y) throws MalformedURLException, InterruptedException {
-        Dimension dimension = getDriver().manage().window().getSize();
+        Dimension dimension = getCurrentDriver().manage().window().getSize();
 
         int start_x = (int) (dimension.width * 0.5);
         int start_y = x;
@@ -98,7 +99,7 @@ public class BasePage {
         int end_x = (int) (dimension.width * 0.2);
         int end_y = y;
 
-        TouchAction touch = new TouchAction((PerformsTouchActions) getDriver());
+        TouchAction touch = new TouchAction((PerformsTouchActions) getCurrentDriver());
         touch.press(point(start_x, start_y))
                 .waitAction(waitOptions(Duration.ofSeconds(1)))
                 .moveTo(point(end_x, end_y))
@@ -107,7 +108,7 @@ public class BasePage {
     }
 
     public static void dragAndDrop(double endX, double endY) throws MalformedURLException, InterruptedException {
-        ((JavascriptExecutor) getDriver()).executeScript(
+        ((JavascriptExecutor) getCurrentDriver()).executeScript(
                 "mobile: dragGesture",
                 ImmutableMap.of(
                         "endX", endX,
@@ -235,7 +236,7 @@ public class BasePage {
             int x = element.getLocation().getX();
 
 
-            TouchAction touchAction = new TouchAction((PerformsTouchActions) getDriver());
+            TouchAction touchAction = new TouchAction((PerformsTouchActions) getCurrentDriver());
             touchAction.tap(PointOption.point(x, y))
                     .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
                     .perform();

@@ -1,21 +1,25 @@
 package stepdefinitions;
 
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import utils.ConfigReader;
 import utils.Driver;
 import java.net.MalformedURLException;
 import java.util.*;
-import static utils.Driver.quitDriver;
+import utils.OS;
+
+import static utils.Driver.getCurrentDriver;
 
 
 public class Hooks {
     public static String apk;
     public static String bundleId;
-
 
     private static final Map<String, String> apkMap = new HashMap<>();
     private static final List<String> availableApks = new ArrayList<>();
@@ -24,24 +28,14 @@ public class Hooks {
     private static final List<String> availableBundleIds = new ArrayList<>();
     private static final Queue<String> lastThreeSelectedBundleIds = new LinkedList<>();
 
-    static {
-        apkMap.put("@kizconnectAndroid", "kizconnect.apk");
-        apkMap.put("@hexaconnectAndroid", "hexaconnect.apk");
-        apkMap.put("@wisniowskiAndroid", "wisniowski.apk");
-        apkMap.put("@flexomV3Android", "FlexomV3.apk");
-        availableApks.addAll(apkMap.values());
-
-    }
-
-    static {
-        bundleIdMap.put("@kizconnectIos", "com.overkiz.kizconnect");
-        bundleIdMap.put("@hexaconnectIos", "com.overkiz.hexaom");
-        bundleIdMap.put("@flexomV3Ios", "com.overkiz.flexomv3");
-        bundleIdMap.put("@wisniowskiIos", "pl.wisniowski.smartCONNECTED");
-        availableBundleIds.addAll(bundleIdMap.values());
-    }
 
     public static String getBundleIdForTags(List<String> tags) {
+        bundleIdMap.put("@kizconnect", "com.overkiz.kizconnect");
+        bundleIdMap.put("@hexaconnect", "com.overkiz.hexaom");
+        bundleIdMap.put("@wisniowski", "pl.wisniowski.smartCONNECTED");
+        bundleIdMap.put("@flexomV3", "com.overkiz.flexomv3");
+        availableBundleIds.addAll(bundleIdMap.values());
+
         List<String> bundleIdList = new ArrayList<>();
         for (String tag : tags) {
             if (bundleIdMap.containsKey(tag)) {
@@ -64,6 +58,12 @@ public class Hooks {
     }
 
     public static String getApkForTags(List<String> tags) {
+        apkMap.put("@kizconnect", "kizconnect.apk");
+        apkMap.put("@hexaconnect", "hexaconnect.apk");
+        apkMap.put("@wisniowski", "wisniowski.apk");
+        apkMap.put("@flexomV3", "FlexomV3.apk");
+        availableApks.addAll(apkMap.values());
+
         List<String> apkList = new ArrayList<>();
         for (String tag : tags) {
             if (apkMap.containsKey(tag)) {
@@ -85,36 +85,35 @@ public class Hooks {
         return null;
     }
 
-
-    @Before("@smokeAndroid")
-    public void setUpMobile(Scenario scenario) throws MalformedURLException, InterruptedException {
-
+    @Before()
+    public void beforeAll(Scenario scenario) throws MalformedURLException {
+        OS.OS=ConfigReader.getProperty("platformName");
         List<String> tags = (List<String>) scenario.getSourceTagNames();
-        String apk = getApkForTags(tags);
-        if (apk != null) {
-            Hooks.apk = apk;
-            System.out.println("Scenario tags: " + tags);
-            System.out.println("Selected APK: " + apk);
-        }
-    }
-
-    @Before("@smokeIos")
-    public void setUpMobileIos(Scenario scenario) {
-        List<String> tags = (List<String>) scenario.getSourceTagNames();
-        String bundleId = getBundleIdForTags(tags);
-        if (bundleId != null) {
-            Hooks.bundleId = bundleId;
-            System.out.println("Scenario tags: " + tags);
-            System.out.println("Selected Bundle ID: " + bundleId);
+        if(OS.OS.equals("Android")){
+            String apk = getApkForTags(tags);
+            if (apk != null) {
+                Hooks.apk = apk;
+                System.out.println("Scenario tags: " + tags);
+                System.out.println("Selected APK: " + apk);
+                Driver.Android = Driver.getAndroidDriver(Driver.getAndroidApps());
+            }
+        }else {
+            String bundleId = getBundleIdForTags(tags);
+            if (bundleId != null) {
+                Hooks.bundleId = bundleId;
+                System.out.println("Scenario tags: " + tags);
+                System.out.println("Selected Bundle ID: " + bundleId);
+                Driver.iOS = Driver.getiOSDriver(Driver.getiOSApps());
+            }
         }
 
     }
 
     @After()
-    public void tearDownMobile(Scenario scenario) throws MalformedURLException, InterruptedException {
+    public void tearDownMobile(Scenario scenario) {
         if (scenario.isFailed()) {
             byte[] screenshot;
-            WebDriver driver = Driver.getDriver();
+            WebDriver driver = Driver.getCurrentDriver() ;
             if (driver != null && driver instanceof TakesScreenshot) {
                 screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             } else {
@@ -123,7 +122,37 @@ public class Hooks {
             scenario.attach(screenshot, "image/png", "screenshot");
         }
         quitDriver();
+    }
 
+    public static String getAppPackage(String app){
+        switch (app){
+            case "kizconnect.apk":
+                return "com.overkiz.kizconnect";
+            case "FlexomV3.apk":
+                return "com.overkiz.flexomv3";
+            case "hexaconnect.apk":
+                return "com.overkiz.hexaom";
+            case "wisniowski.apk":
+                return "com.overkiz.wisniowski";
+        }
+        return null;
+    }
+
+
+    public static void killApplication(AndroidDriver driver){
+        driver.terminateApp(getAppPackage(Hooks.apk));
+    }
+
+    public static void killApplication(IOSDriver driver){
+        driver.terminateApp(bundleId);
+    }
+
+    public static void quitDriver() {
+        if(OS.OS.equals("Android"))
+            killApplication(Driver.Android);
+        if(OS.OS.equals("iOS"))
+            killApplication(Driver.iOS);
+        getCurrentDriver().quit();
     }
 
 

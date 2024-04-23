@@ -8,8 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import java.net.MalformedURLException;
-
-import static utils.Driver.getDriver;
+import utils.Driver;
 
 
 public class OverkizPages {
@@ -17,7 +16,7 @@ public class OverkizPages {
 
     public OverkizPages() throws MalformedURLException, InterruptedException {
 
-        PageFactory.initElements(new AppiumFieldDecorator(getDriver()), this);
+        PageFactory.initElements(new AppiumFieldDecorator(Driver.getCurrentDriver()), this);
 
     }
 
