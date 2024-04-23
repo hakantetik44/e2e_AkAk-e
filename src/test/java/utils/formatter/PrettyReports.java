@@ -1,18 +1,22 @@
 package utils.formatter;
 
+import static java.io.File.createTempFile;
+import static java.util.Collections.singletonList;
+
 import io.cucumber.core.plugin.JsonFormatter;
 import io.cucumber.plugin.EventListener;
 import io.cucumber.plugin.Plugin;
 import io.cucumber.plugin.event.EventHandler;
 import io.cucumber.plugin.event.EventPublisher;
 import io.cucumber.plugin.event.TestRunFinished;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UncheckedIOException;
 import net.masterthought.cucumber.Configuration;
 import net.masterthought.cucumber.ReportBuilder;
-
-import java.io.*;
-
-import static java.io.File.createTempFile;
-import static java.util.Collections.singletonList;
 
 
 public class PrettyReports implements Plugin, EventListener {

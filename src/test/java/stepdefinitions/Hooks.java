@@ -1,20 +1,26 @@
 package stepdefinitions;
 
+import static utils.Driver.getCurrentDriver;
+
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Random;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import utils.ConfigReader;
 import utils.Driver;
-import java.net.MalformedURLException;
-import java.util.*;
 import utils.OS;
-
-import static utils.Driver.getCurrentDriver;
 
 
 public class Hooks {
@@ -139,15 +145,15 @@ public class Hooks {
     }
 
 
-    public static void killApplication(AndroidDriver driver){
+    public void killApplication(AndroidDriver driver){
         driver.terminateApp(getAppPackage(Hooks.apk));
     }
 
-    public static void killApplication(IOSDriver driver){
+    public void killApplication(IOSDriver driver){
         driver.terminateApp(bundleId);
     }
 
-    public static void quitDriver() {
+    public void quitDriver() {
         if(OS.OS.equals("Android"))
             killApplication(Driver.Android);
         if(OS.OS.equals("iOS"))

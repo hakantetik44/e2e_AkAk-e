@@ -2,17 +2,13 @@ package stepdefinitions;
 
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import java.net.MalformedURLException;
+import java.util.Random;
 import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pages.BasePage;
 import pages.OverkizPages;
-import utils.ConfigReader;
-
-import java.net.MalformedURLException;
-import java.util.Random;
 import utils.Driver;
 
 
