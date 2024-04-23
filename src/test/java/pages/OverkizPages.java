@@ -1,18 +1,20 @@
 package pages;
 
-
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import java.net.MalformedURLException;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-
-import java.net.MalformedURLException;
+import stepdefinitions.Hooks;
 import utils.Driver;
+import utils.OS;
 
 
 public class OverkizPages {
 
+    public String appName = getAppName(Hooks.apk);
 
     public OverkizPages() throws MalformedURLException, InterruptedException {
 
@@ -196,6 +198,20 @@ public class OverkizPages {
     public WebElement logoOvezKizIos;
 
 
+    public By
+        buttonNavMore = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/nav_more") : By.id("finishFooter");
 
-
+    public static String getAppName(String app){
+        switch (app){
+            case "kizconnect.apk":
+                return "kizconnect";
+            case "FlexomV3.apk":
+                return "flexomv3";
+            case "hexaconnect.apk":
+                return "hexaom";
+            case "wisniowski.apk":
+                return "wisniowski";
+        }
+        return null;
+    }
 }

@@ -1,15 +1,14 @@
 package utils;
+
 import static stepdefinitions.Hooks.bundleId;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.options.BaseOptions;
-import stepdefinitions.Hooks;
-
-
 import java.net.MalformedURLException;
 import java.net.URL;
+import stepdefinitions.Hooks;
 
 
 public class Driver {

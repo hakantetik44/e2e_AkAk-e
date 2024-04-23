@@ -1,10 +1,20 @@
 package stepdefinitions;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static utils.Driver.getCurrentDriver;
+
 import com.github.javafaker.Faker;
+import com.somfy.ui.BaseElement;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import java.net.MalformedURLException;
+import java.util.List;
+import java.util.Random;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -13,22 +23,15 @@ import pages.BasePage;
 import pages.OverkizPages;
 import utils.ConfigReader;
 
-import java.net.MalformedURLException;
-import java.util.List;
-import java.util.Random;
-import utils.Driver;
-
-import static org.junit.Assert.*;
-
 
 public class PageStepDefsAndroid extends BasePage {
 
     OverkizPages overkiz = new OverkizPages();
-    Actions actions = new Actions(Driver.getCurrentDriver());
+    Actions actions = new Actions(getCurrentDriver());
     Faker faker = new Faker();
 
     Random random = new Random();
-    AppOperationManager manager = new AppOperationManager(Driver.getCurrentDriver());
+    AppOperationManager manager = new AppOperationManager(getCurrentDriver());
 
     public PageStepDefsAndroid() throws MalformedURLException, InterruptedException {
     }
@@ -128,7 +131,7 @@ public class PageStepDefsAndroid extends BasePage {
     public void lesElementsDeLaPageDAccueilSontVerifiesConformementAuxSpecifications() throws InterruptedException, MalformedURLException {
         overkiz.btnSeConnecter.click();
         wait(2);
-        List<WebElement> elementList = Driver.getCurrentDriver().findElements(By.className("android.widget.TextView"));
+        List<WebElement> elementList = getCurrentDriver().findElements(By.className("android.widget.TextView"));
         // Parcourons la liste pour valider les textes
         String[] textsToVerify = {
                 "Android vide",
@@ -189,7 +192,7 @@ public class PageStepDefsAndroid extends BasePage {
         overkiz.btnEnPlus.click();
         overkiz.btnMesInformations.click();
         wait(2);
-        List<WebElement> elementList2 = Driver.getCurrentDriver().findElements(By.className("android.widget.TextView"));
+        List<WebElement> elementList2 = getCurrentDriver().findElements(By.className("android.widget.TextView"));
         String[] textsToVerify2 = {
                 "Prénom",
                 "Nom",
@@ -217,7 +220,7 @@ public class PageStepDefsAndroid extends BasePage {
 
         scrollUp(overkiz.placeEmail, -50);
 
-        List<WebElement> elementList3 = Driver.getCurrentDriver().findElements(By.className("android.widget.TextView"));
+        List<WebElement> elementList3 = getCurrentDriver().findElements(By.className("android.widget.TextView"));
         String[] textsToVerify3 = {
                 "Coordonnées GPS",
                 "Lever de soleil / Coucher de soleil",
@@ -244,11 +247,18 @@ public class PageStepDefsAndroid extends BasePage {
     }
 
 
+    BaseElement<?, ?> buttonNavMore = new BaseElement<>(
+        getCurrentDriver(),
+        getCurrentDriver(),
+        overkiz.buttonNavMore
+    );
+
     @Then("l'utilisateur peut modifier ses informations personnelles")
     public void lUtilisateurPeutModifierSesInformationsPersonnelles() throws InterruptedException {
 
         wait(1);
-        manager.clickOnElement("nav_more");
+        //manager.clickOnElement("nav_more");
+        buttonNavMore.click();
         wait(1);
         manager.clickOnElement("label_google_assistant");
         manager.clickOnElement("edit_text");

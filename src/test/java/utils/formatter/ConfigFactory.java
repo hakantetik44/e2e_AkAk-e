@@ -1,19 +1,24 @@
 package utils.formatter;
 
+import static java.lang.Boolean.parseBoolean;
+import static java.util.Optional.ofNullable;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UncheckedIOException;
+import java.nio.file.Paths;
+import java.util.Enumeration;
+import java.util.Map.Entry;
+import java.util.Properties;
 import net.masterthought.cucumber.Configuration;
 import net.masterthought.cucumber.presentation.PresentationMode;
 import net.masterthought.cucumber.reducers.ReducingMethod;
 import net.masterthought.cucumber.sorting.SortingMethod;
 import org.apache.commons.lang3.StringUtils;
-
-import java.io.*;
-import java.nio.file.Paths;
-import java.util.Enumeration;
-import java.util.Map.Entry;
-import java.util.Properties;
-
-import static java.lang.Boolean.parseBoolean;
-import static java.util.Optional.ofNullable;
 
 public class ConfigFactory {
 
