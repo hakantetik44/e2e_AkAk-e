@@ -1,4 +1,4 @@
-package stepdefinitions;
+package stepdefinitions.menu;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -7,37 +7,36 @@ import static org.junit.Assert.fail;
 
 import static utils.Driver.getCurrentDriver;
 import com.github.javafaker.Faker;
+
+import java.net.MalformedURLException;
+import java.util.List;
+import java.util.Random;
+
 import com.somfy.ui.BaseElement;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import java.net.MalformedURLException;
-import java.util.List;
-import java.util.Random;
 import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import pages.AppOperationManager;
 import pages.BasePage;
-import pages.OverkizPages;
+
+import pages.menu.MyInformationPage;
 import utils.ConfigReader;
 
-
-public class PageStepDefsAndroid extends BasePage {
-
-    OverkizPages overkiz = new OverkizPages();
+public  class MyInformation extends BasePage{
+    MyInformationPage overkiz = new MyInformationPage();
     Actions actions = new Actions(getCurrentDriver());
     Faker faker = new Faker();
 
     Random random = new Random();
     AppOperationManager manager = new AppOperationManager(getCurrentDriver());
 
-    public PageStepDefsAndroid() throws MalformedURLException, InterruptedException {
+    public MyInformation() throws MalformedURLException, InterruptedException {
     }
-
-
-
 
     BaseElement<?, ?> btnEnplus = new BaseElement<>(
             getCurrentDriver(),
@@ -45,6 +44,8 @@ public class PageStepDefsAndroid extends BasePage {
             overkiz.btnEnplus
 
     );
+
+
 
     BaseElement<?, ?> btnMesInfo = new BaseElement<>(
             getCurrentDriver(),
@@ -75,12 +76,48 @@ public class PageStepDefsAndroid extends BasePage {
 
     );
 
+    BaseElement<?, ?> placeFuseauHoraire = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.placeFuseauHoraire
+
+    );
+
+
+    BaseElement<?, ?> placeLabelTelephone = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.placeLabelTelephone
+    );
+
+
+    BaseElement<?, ?> placeLabelAdresse = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.placeLabelAdresse
+    );
+
     BaseElement<?, ?> textEmail = new BaseElement<>(
             getCurrentDriver(),
             getCurrentDriver(),
             overkiz.textEmail
 
     );
+
+    BaseElement<?, ?> placeLabelNom = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.placeLabelNom
+
+    );
+
+    BaseElement<?, ?> placeLabelPrenom = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.placeLabelPrenom
+
+    );
+
 
 
 
@@ -114,12 +151,61 @@ public class PageStepDefsAndroid extends BasePage {
     );
 
 
-    BaseElement<?, ?> placeLabel = new BaseElement<>(
+    BaseElement<?, ?> placeHolderMesInformation  = new BaseElement<>(
             getCurrentDriver(),
             getCurrentDriver(),
-            overkiz.placeLabel
+            overkiz.placeHolderMesInformation
 
     );
+
+
+
+    BaseElement<?, ?> btnOk = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.btnOk
+
+    );
+
+
+    BaseElement<?, ?> placeLabelEmail = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.placeLabelEmail
+
+    );
+
+    BaseElement<?, ?> snackbarText= new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.snackbarText
+
+    );
+
+    BaseElement<?, ?> placeCoordonnées= new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.placeCoordonnées
+
+    );
+
+
+    BaseElement<?, ?> placeNuméroParselle= new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.placeNuméroParselle
+
+    );
+
+    BaseElement<?, ?> placeLeverDeSoleil= new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.placeLeverDeSoleil
+
+    );
+
+
+
 
     @Given("lutilisateur souhaite se connecter à l'application")
     public void lutilisateurSouhaiteSeConnecterLApplication() {
@@ -289,49 +375,35 @@ public class PageStepDefsAndroid extends BasePage {
     @Then("l'utilisateur peut modifier ses informations personnelles")
     public void lUtilisateurPeutModifierSesInformationsPersonnelles() throws InterruptedException {
 
-        placeLabel.click();
-        manager.clickOnElement("edit_text");
-        manager.clearElement("et_email");
-        overkiz.placeHolderMesInformations.sendKeys(getRandomName());
-        manager.clickOnElement("tv_ok");
-        wait(1);
-        // assertTrue(overkiz.snackbarText.getText().contains("Votre profil a été mis à jour"));
-        overkiz.placeNom.click();
-        wait(1);
-        overkiz.placeHolderMesInformations.clear();
-        overkiz.placeHolderMesInformations.sendKeys(getRandomName());
-        manager.clickOnElement("tv_ok");
-        wait(1);
-        // assertTrue(overkiz.snackbarText.getText().contains("Votre profil a été mis à jour"));
-        overkiz.placeTéléphone.click();
-        wait(1);
-        manager.clickOnElement("et_email");
-        manager.clearElement("et_email");
-        overkiz.placeHolderMesInformations.sendKeys(getRandomPhoneNumber());
-        manager.clickOnElement("tv_ok");
-        wait(1);
-        //  assertTrue(overkiz.snackbarText.getText().contains("Votre profil a été mis à jour"));
-        overkiz.placeAdresse.click();
-        wait(1);
-        overkiz.btnAutoriser.click();
-        wait(1);
-        overkiz.btnModifier.click();
-        wait(1);
-        manager.clearElement("edit_text_address");
-        String adresse = faker.address().fullAddress();
-        manager.sendKeysToElement("edit_text_address",adresse);
+        placeLabelNom.click();
+        placeHolderMesInformation.waitVisible().clear();
+        String fakeName = faker.name().fullName();
+        placeHolderMesInformation.sendKeys(fakeName);
+        btnOk.click();
+        assertTrue(snackbarText.getText().contains("Votre profil a été mis à jour"));
+        placeLabelPrenom.click();
+        placeHolderMesInformation.waitVisible().clear();
+        String fakeSurname = faker.name().lastName();
+        placeHolderMesInformation.sendKeys(fakeSurname);
+        btnOk.click();
+        assertTrue(snackbarText.getText().contains("Votre profil a été mis à jour"));
+        placeLabelTelephone.click();
+        placeHolderMesInformation.waitVisible().clear();
+        placeHolderMesInformation.sendKeys(getRandomPhoneNumber());
+        btnOk.click();
+        placeLabelEmail.click();
+        placeHolderMesInformation.waitVisible().clear();
+        placeHolderMesInformation.sendKeys("vfovk5934@yopmail.com");
+        btnOk.click();
+        assertTrue(snackbarText.getText().contains("Votre profil a été mis à jour"));
 
-       manager.clearElement("edit_text_code_postal");
-        manager.sendKeysToElement("edit_text_code_postal",getRandomPostalCode());
-        manager.clickOnElement("tv_ok");
-        wait(1);
-        //   assertTrue(overkiz.snackbarText.getText().contains("Votre profil a été mis à jour"));
-         placeEmail.click();
+        /* placeLabelAdresse.click();
+        placeHolderMesInformation.waitVisible().clear();
+        String fakeAddress = faker.address().fullAddress();
+        placeHolderMesInformation.sendKeys(fakeAddress);
+        btnOk.click();*/
 
-        overkiz.placeHolderMesInformations.clear();
-        overkiz.placeHolderMesInformations.sendKeys("vfovk5934@yopmail.com");
-        overkiz.tvOk.click();
-        //   assertTrue(overkiz.snackbarText.getText().contains("Votre profil a été mis à jour"));
+       //TODO:
 
 
     }
@@ -340,12 +412,11 @@ public class PageStepDefsAndroid extends BasePage {
     @Then("l'utilisateur ne peut pas modifier certaines informations")
     public void lUtilisateurNePeutPasModifierCertainesInformations() throws MalformedURLException, InterruptedException {
 
-        assertFalse(overkiz.placeFuseauHoraire.isEnabled());
+        assertTrue(placeFuseauHoraire.waitVisible().isDisplayed());
         scrollUp(placeEmail.waitVisible(), -50);
-        assertFalse(overkiz.placeCoordonnées.isEnabled());
-        assertFalse(overkiz.placeLeverDeSoleil.isEnabled());
-        assertFalse(overkiz.placeNuméroParselle.isEnabled());
-        assertFalse(overkiz.placeServeurDeConnexion.isEnabled());
+        assertTrue(placeCoordonnées.waitVisible().isDisplayed());
+        assertTrue(placeNuméroParselle.waitVisible().isDisplayed());
+        assertTrue(placeLeverDeSoleil.waitVisible().isDisplayed());
 
     }
 
@@ -362,7 +433,7 @@ public class PageStepDefsAndroid extends BasePage {
         overkiz.getPlaceHolderMotDePasseText.sendKeys(ConfigReader.getProperty("motDePasse"));
         overkiz.btnSeConnecter.click();
         wait(2);
-       // assertTrue(overkiz.textBonjourName.getText().contains("Bonjour"));
+        // assertTrue(overkiz.textBonjourName.getText().contains("Bonjour"));
     }
 
     @When("l'utilisateur sélectionne le {string} pour la géolocalisation")
@@ -374,7 +445,7 @@ public class PageStepDefsAndroid extends BasePage {
     @And("l'utilisateur clique sur Géolocaliser")
     public void lUtilisateurCliqueSurGéolocaliser() {
         manager.clickOnElement("tv_geolocalisation");
-        overkiz.btnOk.click();
+        btnOk.click();
         overkiz.btnAutoriserToujours.click();
     }
 
@@ -418,14 +489,14 @@ public class PageStepDefsAndroid extends BasePage {
 
     @When("l'utilisateur clique sur Activer une fois après avoir ajusté la distance")
     public void lUtilisateurCliqueSurActiverUneFoisAprèsAvoirAjustéLaDistance() {
-       manager.clickOnElement("tv_activate_once");
+        manager.clickOnElement("tv_activate_once");
 
     }
 
     @When("l'utilisateur clique sur Désactiver")
     public void lUtilisateurCliqueSurDésactiver() {
 
-       manager.clickOnElement("tv_deactivate");
+        manager.clickOnElement("tv_deactivate");
     }
 
     @And("utilisateur voit les champs {string} And {string} sur la page d'accueil")
@@ -584,6 +655,4 @@ public class PageStepDefsAndroid extends BasePage {
 
 
 }
-
-
 

@@ -1,4 +1,4 @@
-package pages;
+package pages.menu;
 
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -12,19 +12,16 @@ import utils.Driver;
 import utils.OS;
 
 
-public class OverkizPages {
+public class MyInformationPage {
 
     public String appName = getAppName(Hooks.apk);
 
-    public OverkizPages() throws MalformedURLException, InterruptedException {
+    public MyInformationPage() throws MalformedURLException, InterruptedException {
 
         PageFactory.initElements(new AppiumFieldDecorator(Driver.getCurrentDriver()), this);
 
     }
 
-
-    @AndroidFindBy(xpath = "(//android.widget.ImageView)[2]")
-    public WebElement logoOverKizConnect; //
 
     @AndroidFindBy(xpath = "(//android.widget.RadioButton)[2]")
     public WebElement serverStd;
@@ -38,10 +35,6 @@ public class OverkizPages {
     @AndroidFindBy(xpath = "(//android.widget.TextView)[3]")
     public WebElement tvOk;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_ok")
-    public WebElement getTvOk;
-
-
     @AndroidFindBy(xpath = "(//android.widget.TextView)[3]")
     public WebElement textMotDePasse;
 
@@ -51,8 +44,6 @@ public class OverkizPages {
     @AndroidFindBy(xpath = "(//android.widget.EditText)[1]")
     public WebElement placeHolderEmail;
 
-    @AndroidFindBy(id="com.overkiz.kizconnect:id/zone_pw")
-    public WebElement getTvPw;
 
     @AndroidFindBy(xpath = "(//android.widget.EditText)[1]")
     public WebElement placeHolderMotDePasse;
@@ -66,60 +57,23 @@ public class OverkizPages {
     public WebElement invalidSnackbarText;
 
 
-
     public WebElement btnOXIMOio;
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"RS100 io\"]")
     public WebElement btnRS100io;
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"BL_Actuator\"]")
-    public WebElement btnBL_Actuator;
 
-    @AndroidFindBy(xpath = "(//android.widget.EditText)[2]")
-    public WebElement placeNom;
-    @AndroidFindBy(xpath = "(//android.widget.EditText)[3]")
-    public WebElement placeTéléphone;
 
-    @AndroidFindBy(xpath = "(//android.widget.EditText)[5]")
-    public WebElement placeAdresse;
-
-    @AndroidFindBy(xpath = "(//android.widget.TextView)[3]")
-    public WebElement btnModifier;
-
-    @AndroidFindBy(xpath = "(//android.widget.EditText)[1]")
-    public WebElement placeHolderMesInformations;
-
-    @AndroidFindBy(xpath = "(//android.widget.Button)[1]")
-    public WebElement btnAutoriser;
     @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_always_button")
     public WebElement btnAutoriserToujours;
 
 
-    @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"Europe/Paris\"]")
-    public WebElement placeFuseauHoraire;
 
-    @AndroidFindBy(xpath = "(//android.widget.EditText)[4]")
-    public WebElement placeCoordonnées;
 
-    @AndroidFindBy(xpath = "(//android.widget.EditText)[5]")
-    public WebElement placeLeverDeSoleil;
-
-    @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"2202-5934-6827\"]")
-    public WebElement placeNuméroParselle;
 
     @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"STD24\"]")
     public WebElement placeServeurDeConnexion;
 
 
-    @AndroidFindBy(xpath = "//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.overkiz.kizconnect:id/rv_scenario\"]/android.view.ViewGroup")
-    public WebElement Scénarios;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_geolocalisation")
-    public WebElement btnGeolocalisation;
-
-    @AndroidFindBy(id = "android:id/button1")
-    public WebElement btnOk;
-
-    @AndroidFindBy(xpath = "(//android.widget.TextView)[4]")
-    public WebElement btnGérerMesAccèsSecondaires;
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/et_login")
     public WebElement placeHolderLogin;
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/et_password")
@@ -136,6 +90,10 @@ public class OverkizPages {
 
     @iOSXCUITFindBy(iOSNsPredicate = "name == \"ic_login_logo\"")
     public WebElement logoOvezKizIos;
+
+    @AndroidFindBy(xpath = "(//android.widget.ImageView)[2]")
+    public WebElement logoOverKizConnect; //
+
 
 
     public By
@@ -167,8 +125,38 @@ public class OverkizPages {
             textCoordonnéesGPS = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Coordonnées GPS\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Coordonnées GPS\"]");
 
     public By
-            placeLabel = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/label_google_assistant") : By.xpath("//XCUIElementTypeStaticText[@label=\"\"]");
+            placeLabelNom = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[1]") : By.xpath("(//XCUIElementTypeImage[@name=\"editableImageView_UserInfoCell\"])[1]");
 
+    public By
+            placeLabelPrenom = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[2]") : By.xpath("(//XCUIElementTypeImage[@name=\"editableImageView_UserInfoCell\"])[2]");
+
+    public By
+            placeLabelTelephone = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[3]") : By.xpath("(//XCUIElementTypeImage[@name=\"editableImageView_UserInfoCell\"])[3]");
+
+    public By
+            placeLabelEmail = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[4]") : By.xpath("(//XCUIElementTypeImage[@name=\"editableImageView_UserInfoCell\"])[4]");
+    public By
+            placeLabelAdresse = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[5]") : By.xpath("(//XCUIElementTypeImage[@name=\"editableImageView_UserInfoCell\"])[5]");
+    public By
+           placeHolderMesInformation = OS.isAndroid() ?  By.id("com.overkiz."+appName+":id/et_email") : By.xpath("(//XCUIElementTypeTextField)[1]");
+
+    public By
+            btnOk = OS.isAndroid() ?  By.id("com.overkiz."+appName+":id/tv_ok") : By.id("OK");
+
+    public By
+            snackbarText = OS.isAndroid() ?  By.id("com.overkiz."+appName+":id/snackbar_text") : By.id("Votre profil a été mis à jour");
+
+    public By
+            placeFuseauHoraire = OS.isAndroid() ? By.xpath("//android.widget.EditText[@text=\"Europe/Paris\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Europe/Paris\"]");
+
+    public By
+            placeCoordonnées = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[4]") : By.xpath("(//XCUIElementTypeStaticText)[15]");
+
+    public By
+          placeLeverDeSoleil = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[5]") : By.xpath("(//XCUIElementTypeStaticText)[17]");
+
+    public By
+          placeNuméroParselle = OS.isAndroid() ? By.xpath("//android.widget.EditText[@text=\"2202-5934-6827\"]") : By.xpath("(//XCUIElementTypeStaticText)[19]");
 
     public String getAppName(String app){
         if(OS.OS.equals("Android")){

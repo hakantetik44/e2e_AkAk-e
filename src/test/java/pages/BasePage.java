@@ -172,6 +172,7 @@ public class BasePage {
         }
     }
 
+
     public boolean cliquerLogoOverKizConnectSeptFois(Actions actions, WebElement logoOverKizConnect) {
         try {
             for (int i = 0; i < 7; i++) {
@@ -289,7 +290,6 @@ public class BasePage {
         getCurrentDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     }
 }
-
 
 
 
