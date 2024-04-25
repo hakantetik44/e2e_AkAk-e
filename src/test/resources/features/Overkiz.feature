@@ -14,7 +14,7 @@ Feature: Se connecter à overkiz
       | hexaconnect |
 
   @kizconnect @flexomV3 @hexaconnect @APPSV2-1134
-  Scenario Outline:  Modifications des informations personnelles pour Android
+  Scenario Outline:  Modifications des informations personnelles pour
     Given l'utilisateur souhaite modifier ses informations personnelles
     When il accède à l'application Overkiz pour accéder à son profil
     And l'utilisateur peut modifier ses informations personnelles

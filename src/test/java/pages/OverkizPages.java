@@ -167,7 +167,7 @@ public class OverkizPages {
             textCoordonnéesGPS = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Coordonnées GPS\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Coordonnées GPS\"]");
 
     public By
-            placeLabel = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/label_google_assistant") : By.xpath("//XCUIElementTypeStaticText[@label=\"Coordonnées GPS\"]");
+            placeLabel = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/label_google_assistant") : By.xpath("//XCUIElementTypeStaticText[@label=\"\"]");
 
 
     public String getAppName(String app){
