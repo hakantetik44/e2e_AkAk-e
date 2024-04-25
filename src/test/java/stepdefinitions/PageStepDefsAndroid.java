@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static utils.Driver.getCurrentDriver;
 
+import static utils.Driver.getCurrentDriver;
 import com.github.javafaker.Faker;
 import com.somfy.ui.BaseElement;
 import io.cucumber.java.en.And;
@@ -36,6 +36,91 @@ public class PageStepDefsAndroid extends BasePage {
     public PageStepDefsAndroid() throws MalformedURLException, InterruptedException {
     }
 
+
+
+
+    BaseElement<?, ?> btnEnplus = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.btnEnplus
+
+    );
+
+    BaseElement<?, ?> btnMesInfo = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.btnMesInfo
+
+    );
+
+    BaseElement<?, ?> listText = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.listText
+
+    );
+
+
+    BaseElement<?, ?> textNom = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.textNom
+
+    );
+
+    BaseElement<?, ?> textPrenom = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.textPreNom
+
+    );
+
+    BaseElement<?, ?> textEmail = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.textEmail
+
+    );
+
+
+
+    BaseElement<?, ?> placeEmail = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.placeEmail
+
+    );
+
+    BaseElement<?, ?> textAdresse = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.textAdresse
+
+    );
+
+    BaseElement<?, ?> textFuseauHoraire = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.textFuseauHoraire
+
+    );
+
+
+    BaseElement<?, ?> textCoordonnéesGPS  = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.textCoordonnéesGPS
+
+    );
+
+
+    BaseElement<?, ?> placeLabel = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.placeLabel
+
+    );
+
     @Given("lutilisateur souhaite se connecter à l'application")
     public void lutilisateurSouhaiteSeConnecterLApplication() {
 
@@ -44,6 +129,7 @@ public class PageStepDefsAndroid extends BasePage {
 
     @When("il accède à l'application Overkiz")
     public void ilAccedeALApplicationOverkiz() {
+
         cliquerLogoOverKizConnectSixFois(actions, overkiz.logoOverKizConnect);
         assertTrue(overkiz.serverStd.isDisplayed());
         overkiz.editText105.clear();
@@ -165,105 +251,46 @@ public class PageStepDefsAndroid extends BasePage {
 
     @Given("l'utilisateur souhaite vérifier ses informations personnelles")
     public void lUtilisateurSouhaiteVerifierSesInformationsPersonnelles() {
-        //TODO:
+        //TODO:Aller à la page d'accueil
+    }
+
+    @When("il accède à l'application Overkiz pour accéder à son profil")
+    public void ilAccedeALApplicationOverkizPourAccederASonProfil() {
+
+        btnEnplus.click();
+        btnMesInfo.click();
     }
 
 
     @Given("l'utilisateur souhaite modifier ses informations personnelles")
     public void lUtilisateurSouhaiteModifierSesInformationsPersonnelles() {
+        //TODO:Aller à la page d'accueil
+
     }
 
     @When("il accède à l'application Overkiz avec ses informations de connexion")
     public void ilAccedeALApplicationOverkizAvecSesInformationsDeConnexion() {
-        cliquerLogoOverKizConnectSixFois(actions, overkiz.logoOverKizConnect);
-        assertTrue(overkiz.serverStd.isDisplayed());
-        overkiz.editText105.clear();
-        overkiz.serverStd.click();
-        overkiz.editText.sendKeys("24");
-        overkiz.tvOk.click();
-        overkiz.placeHolderEmail.sendKeys(ConfigReader.getProperty("adressseEmail"));
-        overkiz.placeHolderMotDePasse.click();
-        overkiz.getPlaceHolderMotDePasseText.sendKeys(ConfigReader.getProperty("motDePasse"));
-        manager.clickOnElement("tv_login");
+
     }
 
     @And("l'utilisateur peut vérifier ses informations personnelles")
     public void lUtilisateurPeutVerifierSesInformationsPersonnelles() throws InterruptedException, MalformedURLException {
-        overkiz.btnEnPlus.click();
-        overkiz.btnMesInformations.click();
-        wait(2);
-        List<WebElement> elementList2 = getCurrentDriver().findElements(By.className("android.widget.TextView"));
-        String[] textsToVerify2 = {
-                "Prénom",
-                "Nom",
-                "Téléphone",
-                "Email",
-                "Adresse",
-                "Fuseau horaire",
-        };
-
-        for (String text : textsToVerify2) {
-            boolean isTextFound = false;
-            for (WebElement element : elementList2) {
-                String elementText = element.getText();
-                if (elementText.contains(text)) {
-                    System.out.println(text + " Le text visible.");
-                    isTextFound = true;
-                    break;
-                }
-            }
-            if (!isTextFound) {
-                System.out.println(text + " Le text non visible.");
-                fail("Erreur : Le texte '" + text + "' n'est pas trouvé dans l'élément !");
-            }
-        }
-
-        scrollUp(overkiz.placeEmail, -50);
-
-        List<WebElement> elementList3 = getCurrentDriver().findElements(By.className("android.widget.TextView"));
-        String[] textsToVerify3 = {
-                "Coordonnées GPS",
-                "Lever de soleil / Coucher de soleil",
-                "Numéro de passerelle",
-                "Serveur de connexion"
-        };
-
-        for (String text : textsToVerify3) {
-            boolean isTextFound = false;
-            for (WebElement element : elementList3) {
-                String elementText = element.getText();
-                if (elementText.contains(text)) {
-                    System.out.println(text + " Le text visible.");
-                    isTextFound = true;
-                    break;
-                }
-            }
-            if (!isTextFound) {
-                System.out.println(text + " Le text non visible.");
-                fail("Erreur : Le texte '" + text + "' n'est pas trouvé dans l'élément !");
-            }
-        }
+        assertTrue(textPrenom.getText().contains("Prénom"));
+        assertTrue(textNom.getText().contains("Nom"));
+        assertTrue(textEmail.getText().contains("Email"));
+        assertTrue(textAdresse.getText().contains("Adresse"));
+        scrollUp(placeEmail.waitVisible(), -50);
+        assertTrue(textFuseauHoraire.getText().equalsIgnoreCase("Fuseau Horaire"));
+        assertTrue(textCoordonnéesGPS.getText().contains("Coordonnées GPS"));
 
     }
 
 
-    BaseElement<?, ?> buttonNavMore = new BaseElement<>(
-        getCurrentDriver(),
-        getCurrentDriver(),
-        overkiz.buttonNavMore
-
-    );
-
     @Then("l'utilisateur peut modifier ses informations personnelles")
     public void lUtilisateurPeutModifierSesInformationsPersonnelles() throws InterruptedException {
 
-        wait(1);
-        //manager.clickOnElement("nav_more");
-        buttonNavMore.click();
-        wait(1);
-        manager.clickOnElement("label_google_assistant");
+        placeLabel.click();
         manager.clickOnElement("edit_text");
-        wait(1);
         manager.clearElement("et_email");
         overkiz.placeHolderMesInformations.sendKeys(getRandomName());
         manager.clickOnElement("tv_ok");
@@ -299,8 +326,8 @@ public class PageStepDefsAndroid extends BasePage {
         manager.clickOnElement("tv_ok");
         wait(1);
         //   assertTrue(overkiz.snackbarText.getText().contains("Votre profil a été mis à jour"));
-        overkiz.placeEmail.click();
-        wait(1);
+         placeEmail.click();
+
         overkiz.placeHolderMesInformations.clear();
         overkiz.placeHolderMesInformations.sendKeys("vfovk5934@yopmail.com");
         overkiz.tvOk.click();
@@ -310,11 +337,11 @@ public class PageStepDefsAndroid extends BasePage {
     }
 
 
-    @And("l'utilisateur ne peut pas modifier certaines informations")
+    @Then("l'utilisateur ne peut pas modifier certaines informations")
     public void lUtilisateurNePeutPasModifierCertainesInformations() throws MalformedURLException, InterruptedException {
 
         assertFalse(overkiz.placeFuseauHoraire.isEnabled());
-        scrollUp(overkiz.placeEmail, -50);
+        scrollUp(placeEmail.waitVisible(), -50);
         assertFalse(overkiz.placeCoordonnées.isEnabled());
         assertFalse(overkiz.placeLeverDeSoleil.isEnabled());
         assertFalse(overkiz.placeNuméroParselle.isEnabled());
@@ -340,10 +367,7 @@ public class PageStepDefsAndroid extends BasePage {
 
     @When("l'utilisateur sélectionne le {string} pour la géolocalisation")
     public void lUtilisateurSélectionneLePourLaGéolocalisation(String textScénarios) {
-        assertEquals(overkiz.btnScénarios.getText(), textScénarios);
-        System.out.println(overkiz.btnScénarios.getText() + textScénarios);
-        overkiz.btnScénarios.click();
-        manager.clickOnElement("name");
+
 
     }
 
@@ -408,15 +432,14 @@ public class PageStepDefsAndroid extends BasePage {
     public void utilisateurVoitLesChampsAndSurLaPageDAccueil(String expectedText1, String expectedText2) {
         String actualTextConnexionTitle = "Connexion";
         assertEquals(overkiz.titleConnexion.getText(), actualTextConnexionTitle);
-        assertTrue(overkiz.textEmail.getText().contains(expectedText1)
+        assertTrue(textEmail.getText().contains(expectedText1)
                 && overkiz.textMotDePasse.getText().contains(expectedText2));
     }
 
 
     @When("l'utilisateur clique sur {string} dans longlet {string}")
     public void lUtilisateurCliqueSurDansLonglet(String textGérerMesAccés, String textEnPlus) {
-        overkiz.btnEnPlus.click();
-        overkiz.btnGérerMesAccèsSecondaires.click();
+
 
     }
 
@@ -520,8 +543,7 @@ public class PageStepDefsAndroid extends BasePage {
 
     @When("Je sélectionne {string} puis {string}")
     public void jeSelectionnePuis(String textExpected1, String textExpected2) throws MalformedURLException, InterruptedException {
-
-        overkiz.btnEnPlus.click();
+        btnEnplus.click();
         wait(1);
         scrollUp(overkiz.btnNotification, -40);
         manager.clickOnElement("tv_log_out");
@@ -559,6 +581,8 @@ public class PageStepDefsAndroid extends BasePage {
     public void lEcranDeConnexionEstDeNouveauVisible() {
         System.out.println();
     }
+
+
 }
 
 

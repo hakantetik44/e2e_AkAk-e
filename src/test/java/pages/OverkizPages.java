@@ -40,8 +40,7 @@ public class OverkizPages {
 
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_ok")
     public WebElement getTvOk;
-    @AndroidFindBy(xpath = "(//android.widget.TextView)[2]")
-    public WebElement textEmail;
+
 
     @AndroidFindBy(xpath = "(//android.widget.TextView)[3]")
     public WebElement textMotDePasse;
@@ -63,55 +62,21 @@ public class OverkizPages {
     @AndroidFindBy(xpath = "(//android.widget.TextView)[4]")
     public WebElement btnSeConnecter;
 
-    @AndroidFindBy(xpath = "(//android.widget.TextView)[1]")
-    public WebElement textBonjourName;
-
     @AndroidFindBy(xpath = "(//android.widget.TextView)[7]")
     public WebElement invalidSnackbarText;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Logement\"]")
-    public WebElement btnLogement;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Android vide\"]")
-    public WebElement btnAndroidVide;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Accueil\"]")
-    public WebElement btnAccueil;
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Scénarios\"]")
-    public WebElement btnScénarios;
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"En plus\"]")
-    public WebElement btnEnPlus;
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Conso\"]")
-    public WebElement btnConso;
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"OXIMO io\"]")
     public WebElement btnOXIMOio;
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"RS100 io\"]")
     public WebElement btnRS100io;
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"BL_Actuator\"]")
     public WebElement btnBL_Actuator;
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Zone 1\"]")
-    public WebElement btnZone1;
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Mes Favoris\"]")
-    public WebElement btnMesFavoris;
-
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Mes informations personnelles\"]")
-    public WebElement btnMesInformations;
-
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Changer de mot de passe\"]")
-    public WebElement btnchangerMotDePasse;
-
-
-    @AndroidFindBy(xpath = "(//android.widget.EditText)[1]")
-    public WebElement placePrénom;
 
     @AndroidFindBy(xpath = "(//android.widget.EditText)[2]")
     public WebElement placeNom;
     @AndroidFindBy(xpath = "(//android.widget.EditText)[3]")
     public WebElement placeTéléphone;
-
-    @AndroidFindBy(xpath = "(//android.widget.EditText)[4]")
-    public WebElement placeEmail;
-
 
     @AndroidFindBy(xpath = "(//android.widget.EditText)[5]")
     public WebElement placeAdresse;
@@ -126,18 +91,7 @@ public class OverkizPages {
     public WebElement btnAutoriser;
     @AndroidFindBy(id = "com.android.permissioncontroller:id/permission_allow_always_button")
     public WebElement btnAutoriserToujours;
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/snackbar_text")
-    public WebElement snackbarText;
 
-
-
-
-
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/edit_text_city")
-    public WebElement placeHolderVille;
-
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/edit_text_country")
-    public WebElement placeHolderPays;
 
     @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"Europe/Paris\"]")
     public WebElement placeFuseauHoraire;
@@ -163,21 +117,7 @@ public class OverkizPages {
 
     @AndroidFindBy(id = "android:id/button1")
     public WebElement btnOk;
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_deactivate")
-    public WebElement btnDésactiver;
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_activate_always")
-    public WebElement btnToujoursActiver;
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_activate_once")
-    public WebElement btnActiverUneFois;
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/progress_distance")
-    public WebElement progressDistance;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/label_distance")
-    public WebElement textDistanceDeDomicile;
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/im_back")
-    public WebElement btnRetour;
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_enregister")
-    public WebElement btnEnregister;
     @AndroidFindBy(xpath = "(//android.widget.TextView)[4]")
     public WebElement btnGérerMesAccèsSecondaires;
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/et_login")
@@ -199,20 +139,51 @@ public class OverkizPages {
 
 
     public By
-        buttonNavMore = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/nav_more") : By.id("finishFooter");
+            btnEnplus = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/nav_more") : By.id("En plus");
+
+    public By
+            btnMesInfo = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/label_google_assistant") : By.id("Mes informations personnelles ");
+
+    public By
+            listText = OS.isAndroid() ? By.className("android.widget.EditText") : By.linkText("Nom");
+
+    public By
+            placeEmail = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[4]") :  By.name("valueLabel_UserInfoCell");
+
+    public By
+            textNom = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Nom\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Nom\"]");
+
+    public By
+            textPreNom = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Prénom\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Prénom\"]");
+    public By
+            textEmail = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Email\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Email\"]");
+
+    public By
+            textAdresse = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Adresse\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Adresse\"]");
+
+    public By
+            textFuseauHoraire = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Fuseau horaire\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Fuseau horaire\"]");
+    public By
+            textCoordonnéesGPS = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Coordonnées GPS\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Coordonnées GPS\"]");
+
+    public By
+            placeLabel = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/label_google_assistant") : By.xpath("//XCUIElementTypeStaticText[@label=\"Coordonnées GPS\"]");
 
 
-
-    public static String getAppName(String app){
-        switch (app){
-            case "kizconnect.apk":
-                return "kizconnect";
-            case "FlexomV3.apk":
-                return "flexomv3";
-            case "hexaconnect.apk":
-                return "hexaom";
-            case "wisniowski.apk":
-                return "wisniowski";
+    public String getAppName(String app){
+        if(OS.OS.equals("Android")){
+            switch (app){
+                case "kizconnect.apk":
+                    return "kizconnect";
+                case "FlexomV3.apk":
+                    return "flexomv3";
+                case "hexaconnect.apk":
+                    return "hexaom";
+                case "wisniowski.apk":
+                    return "wisniowski";
+                default:
+                    return null;
+            }
         }
         return null;
     }

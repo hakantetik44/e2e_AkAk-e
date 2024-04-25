@@ -18,7 +18,6 @@ public class PageStepDefsIos extends BasePage {
     OverkizPages overkiz = new OverkizPages();
     Actions actions = new Actions(Driver.getCurrentDriver());
     Faker faker = new Faker();
-
     Random random = new Random();
 
     public PageStepDefsIos() throws MalformedURLException, InterruptedException {

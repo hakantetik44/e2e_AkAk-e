@@ -27,6 +27,7 @@ public class Hooks {
     public static String apk;
     public static String bundleId;
 
+
     private static final Map<String, String> apkMap = new HashMap<>();
     private static final List<String> availableApks = new ArrayList<>();
     private static final Queue<String> lastThreeSelectedApks = new LinkedList<>();
