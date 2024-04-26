@@ -7,6 +7,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.cucumber.java.en.Given;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,92 +28,51 @@ public class Hooks {
     public static String apk;
     public static String bundleId;
 
-    private static final Map<String, String> apkMap = new HashMap<>();
-    private static final List<String> availableApks = new ArrayList<>();
-    private static final Queue<String> lastThreeSelectedApks = new LinkedList<>();
-    private static final Map<String, String> bundleIdMap = new HashMap<>();
-    private static final List<String> availableBundleIds = new ArrayList<>();
-    private static final Queue<String> lastThreeSelectedBundleIds = new LinkedList<>();
 
-
-    public static String getBundleIdForTags(List<String> tags) {
-        bundleIdMap.put("@kizconnect", "com.overkiz.kizconnect");
-        bundleIdMap.put("@hexaconnect", "com.overkiz.hexaom");
-        bundleIdMap.put("@wisniowski", "pl.wisniowski.smartCONNECTED");
-        bundleIdMap.put("@flexomV3", "com.overkiz.flexomv3");
-        availableBundleIds.addAll(bundleIdMap.values());
-
-        List<String> bundleIdList = new ArrayList<>();
-        for (String tag : tags) {
-            if (bundleIdMap.containsKey(tag)) {
-                bundleIdList.add(bundleIdMap.get(tag));
+    @Given("Je lance mon app {string}")
+    public void launchapp(String appname) throws MalformedURLException {
+        if(OS.OS.equals("Android")){
+            String apk = getApkForTags(appname);
+            if (apk != null) {
+                Hooks.apk = apk;
+                System.out.println("Scenario tags: " + appname);
+                System.out.println("Selected APK: " + apk);
+                Driver.Android = Driver.getAndroidDriver(Driver.getAndroidApps());
+            }
+        }else {
+            String bundleId = getBundleIdForTags(appname);
+            if (bundleId != null) {
+                Hooks.bundleId = bundleId;
+                System.out.println("Scenario tags: " + appname);
+                System.out.println("Selected Bundle ID: " + bundleId);
+                Driver.iOS = Driver.getiOSDriver(Driver.getiOSApps());
             }
         }
-        if (!bundleIdList.isEmpty()) {
-            bundleIdList.removeAll(lastThreeSelectedBundleIds);
-            Random random = new Random();
-            int index = random.nextInt(bundleIdList.size());
-            String selectedBundleId = bundleIdList.get(index);
-
-            lastThreeSelectedBundleIds.add(selectedBundleId);
-            if (lastThreeSelectedBundleIds.size() > 3) {
-                lastThreeSelectedBundleIds.poll();
-            }
-            return selectedBundleId;
-        }
-        return null;
     }
 
-    public static String getApkForTags(List<String> tags) {
-        apkMap.put("@kizconnect", "kizconnect.apk");
-        apkMap.put("@hexaconnect", "hexaconnect.apk");
-        apkMap.put("@wisniowski", "wisniowski.apk");
-        apkMap.put("@flexomV3", "FlexomV3.apk");
-        availableApks.addAll(apkMap.values());
+    public static String getBundleIdForTags(String app) {
+      return switch (app) {
+        case "kizconnect" -> "com.overkiz.kizconnect";
+        case "hexaconnect" -> "com.overkiz.hexaom";
+        case "wisniowski" -> "pl.wisniowski.smartCONNECTED";
+        case "flexomV3" -> "com.overkiz.flexomv3";
+        default -> null;
+      };
+    }
 
-        List<String> apkList = new ArrayList<>();
-        for (String tag : tags) {
-            if (apkMap.containsKey(tag)) {
-                apkList.add(apkMap.get(tag));
-            }
-        }
-        if (!apkList.isEmpty()) {
-            apkList.removeAll(lastThreeSelectedApks);
-            Random random = new Random();
-            int index = random.nextInt(apkList.size());
-            String selectedApk = apkList.get(index);
-
-            lastThreeSelectedApks.add(selectedApk);
-            if (lastThreeSelectedApks.size() > 3) {
-                lastThreeSelectedApks.poll();
-            }
-            return selectedApk;
-        }
-        return null;
+    public static String getApkForTags(String app) {
+        return switch (app) {
+            case "kizconnect" -> "kizconnect.apk";
+            case "hexaconnect" -> "hexaconnect.apk";
+            case "wisniowski" -> "wisniowski.apk";
+            case "flexomV3" -> "FlexomV3.apk";
+            default -> null;
+        };
     }
 
     @Before()
     public void beforeAll(Scenario scenario) throws MalformedURLException {
         OS.OS=ConfigReader.getProperty("platformName");
-        List<String> tags = (List<String>) scenario.getSourceTagNames();
-        if(OS.OS.equals("Android")){
-            String apk = getApkForTags(tags);
-            if (apk != null) {
-                Hooks.apk = apk;
-                System.out.println("Scenario tags: " + tags);
-                System.out.println("Selected APK: " + apk);
-                Driver.Android = Driver.getAndroidDriver(Driver.getAndroidApps());
-            }
-        }else {
-            String bundleId = getBundleIdForTags(tags);
-            if (bundleId != null) {
-                Hooks.bundleId = bundleId;
-                System.out.println("Scenario tags: " + tags);
-                System.out.println("Selected Bundle ID: " + bundleId);
-                Driver.iOS = Driver.getiOSDriver(Driver.getiOSApps());
-            }
-        }
-
     }
 
     @After()

@@ -19,14 +19,13 @@ public class Driver {
 
     public static BaseOptions getAndroidApps(){
         BaseOptions options = new BaseOptions()
-            .amend("appium:platformeVersion", "12")
-            .amend("appium:deviceName", "R5CT4308RMB")
+            .amend("appium:platformeVersion", "10.0")
+            .amend("appium:deviceName", "Samsung")
             .amend("appium:automationName", "UiAutomator2")
-            .amend("appium:udid", "RF8N92CM2GM")
             .amend("appium:noReset", true)
             .amend("appium:wdaLocalPort", "7100")
             .amend("appium:platformName", "Android")
-            .amend("appium:app", "/Users/nicola/Documents/GitLab/e2e_overkiz/src/test/resources/Apps/" + Hooks.apk)
+            .amend("appium:app", "/Users/hakan/IdeaProjects/e2e_overkiz/src/test/resources/Apps/" + Hooks.apk)
             .amend("appium:connectHardwareKeyboard", true)
             .amend("appium:appWaitPackage", Hooks.getAppPackage(Hooks.apk))
             .amend("appium:newCommandTimeout", 3600);
