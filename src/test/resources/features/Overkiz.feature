@@ -1,20 +1,21 @@
-
 Feature: Se connecter à overkiz
 
-  @kizconnect @flexomV3 @hexaconnect  @APPSV2-1133
+  @APPSV2-1133
   Scenario Outline: Vérification des informations personnelles
+    Given Je lance mon app "<tag>"
     Given l'utilisateur souhaite vérifier ses informations personnelles
     When il accède à l'application Overkiz pour accéder à son profil
     Then l'utilisateur peut vérifier ses informations personnelles
-
     Examples:
       | tag         |
       | kizconnect  |
-      | flexomV3    |
       | hexaconnect |
+      | flexomV3    |
 
-  @kizconnect @flexomV3 @hexaconnect @APPSV2-1134
+
+  @APPSV2-1134
   Scenario Outline:  Modifications des informations personnelles
+    Given Je lance mon app "<tag>"
     Given l'utilisateur souhaite modifier ses informations personnelles
     When il accède à l'application Overkiz pour accéder à son profil
     And l'utilisateur peut modifier ses informations personnelles
@@ -24,11 +25,12 @@ Feature: Se connecter à overkiz
       | kizconnect  |
       | flexomV3    |
       | hexaconnect |
+      | wisniowski  |
 
 
-  @kizconnect @hexaconnect  @APPSV2-1135
+  @kizconnect @hexaconnect @wisniowski @flexomV3 @APPSV2-1135
   Scenario Outline: Planification via la géolocalisation
-    Given l'utilisateur souhaite planifier via la géolocalisation
+    Given l'utilisateur est sur lécran daccueil
     When l'utilisateur sélectionne le "Scénarios" pour la géolocalisation
     And l'utilisateur clique sur Géolocaliser
     Then trois actions sont possibles : Désactiver, Toujours activer, Activer une fois
@@ -46,6 +48,8 @@ Feature: Se connecter à overkiz
       | tag         |
       | kizconnect  |
       | hexaconnect |
+      | wisniowski  |
+      | flexomV3    |
 
 
   @kizconnect @hexaconnect @wisniowski @flexomV3 @APPSV2-1136
@@ -57,7 +61,6 @@ Feature: Se connecter à overkiz
     Then l'accès secondaire est créé
     And  un écran récapitulatif des comptes secondaires existants apparaît
     Examples:
-      | tag         |
       | kizconnect  |
       | hexaconnect |
       | wisniowski  |
@@ -85,7 +88,6 @@ Feature: Se connecter à overkiz
     When l'utilisateur lit les informations du capteur
     Then l'utilisateur devrait voir les informations du capteur
     Examples:
-      | tag         |
       | kizconnect  |
       | hexaconnect |
       | wisniowski  |
@@ -103,12 +105,9 @@ Feature: Se connecter à overkiz
     Then L’application pointe sur le serveur sélectionné
     And L'écran de connexion est de nouveau visible
     Examples:
-      | tag         |
-      | kizconnect  |
-      | hexaconnect |
-      | wisniowski  |
-      | flexomV3    |
-
-
+      | @kizconnect  |
+      | @hexaconnect |
+      | @wisniowski  |
+      | @flexomV3    |
 
 
