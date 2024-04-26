@@ -7,6 +7,26 @@ Feature: Se connecter à overkiz
     Given l'utilisateur souhaite vérifier ses informations personnelles
     When il accède à l'application Overkiz pour accéder à son profil
     Then l'utilisateur peut vérifier ses informations personnelles
+    Examples:
+      | tag         |
+      | kizconnect  |
+      | hexaconnect |
+      | flexomV3    |
+
+
+  @APPSV2-1134
+  Scenario Outline:  Modifications des informations personnelles
+    Given Je lance mon app "<tag>"
+    Given l'utilisateur souhaite modifier ses informations personnelles
+    When il accède à l'application Overkiz pour accéder à son profil
+    And l'utilisateur peut modifier ses informations personnelles
+    Then l'utilisateur ne peut pas modifier certaines informations
+    Examples:
+      | tag         |
+      | kizconnect  |
+      | flexomV3    |
+      | hexaconnect |
+      | wisniowski  |
 
     Examples:
       | tag         |
