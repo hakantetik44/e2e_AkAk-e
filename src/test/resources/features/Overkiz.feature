@@ -25,9 +25,10 @@ Feature: Se connecter à overkiz
       | flexomV3    |
       | hexaconnect |
 
-  @kizconnect @hexaconnect @wisniowski @flexomV3 @APPSV2-1135
+
+  @kizconnect @hexaconnect  @APPSV2-1135
   Scenario Outline: Planification via la géolocalisation
-    Given l'utilisateur est sur lécran daccueil
+    Given l'utilisateur souhaite planifier via la géolocalisation
     When l'utilisateur sélectionne le "Scénarios" pour la géolocalisation
     And l'utilisateur clique sur Géolocaliser
     Then trois actions sont possibles : Désactiver, Toujours activer, Activer une fois
@@ -42,12 +43,9 @@ Feature: Se connecter à overkiz
     And l'utilisateur clique sur Enregistrer
     Then l'utilisateur vérifie dans linterface dadministration que la planification est prise en compte dans le menu
     Examples:
+      | tag         |
       | kizconnect  |
       | hexaconnect |
-      | wisniowski  |
-      | flexomV3    |
-
-
 
 
   @kizconnect @hexaconnect @wisniowski @flexomV3 @APPSV2-1136
@@ -59,6 +57,7 @@ Feature: Se connecter à overkiz
     Then l'accès secondaire est créé
     And  un écran récapitulatif des comptes secondaires existants apparaît
     Examples:
+      | tag         |
       | kizconnect  |
       | hexaconnect |
       | wisniowski  |
@@ -86,6 +85,7 @@ Feature: Se connecter à overkiz
     When l'utilisateur lit les informations du capteur
     Then l'utilisateur devrait voir les informations du capteur
     Examples:
+      | tag         |
       | kizconnect  |
       | hexaconnect |
       | wisniowski  |
@@ -103,10 +103,12 @@ Feature: Se connecter à overkiz
     Then L’application pointe sur le serveur sélectionné
     And L'écran de connexion est de nouveau visible
     Examples:
-      | @kizconnect  |
-      | @hexaconnect |
-      | @wisniowski  |
-      | @flexomV3    |
+      | tag         |
+      | kizconnect  |
+      | hexaconnect |
+      | wisniowski  |
+      | flexomV3    |
+
 
 
 

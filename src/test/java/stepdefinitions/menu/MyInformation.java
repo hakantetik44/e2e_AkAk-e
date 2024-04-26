@@ -436,68 +436,6 @@ public  class MyInformation extends BasePage{
         // assertTrue(overkiz.textBonjourName.getText().contains("Bonjour"));
     }
 
-    @When("l'utilisateur sélectionne le {string} pour la géolocalisation")
-    public void lUtilisateurSélectionneLePourLaGéolocalisation(String textScénarios) {
-
-
-    }
-
-    @And("l'utilisateur clique sur Géolocaliser")
-    public void lUtilisateurCliqueSurGéolocaliser() {
-        manager.clickOnElement("tv_geolocalisation");
-        btnOk.click();
-        overkiz.btnAutoriserToujours.click();
-    }
-
-    @Then("trois actions sont possibles : Désactiver, Toujours activer, Activer une fois")
-    public void troisActionsSontPossiblesDésactiverToujoursActiverActiverUneFois() {
-        assertTrue(manager.verifyElementText("tv_deactivate","Désactiver"));
-        assertTrue(manager.verifyElementText("tv_activate_always","Toujours activer"));
-        assertTrue(manager.verifyElementText("tv_activate_once","Activer une fois"));
-
-    }
-
-    @And("l'utilisateur clique sur Toujours activer après avoir ajusté la distance")
-    public void lUtilisateurCliqueSurToujoursActiverAprèsAvoirAjustéLaDistance() {
-        manager.clickOnElement("Toujours activer");
-    }
-
-    @When("l'utilisateur peut choisir une distance entre {int}m And {int}km à laide dun curseur nommé {string}")
-    public void lUtilisateurPeutChoisirUneDistanceEntreMAndKmÀLaideDunCurseurNommé(int arg0, int arg1, String expectedText) {
-        assertTrue(manager.verifyElementText("label_distance",expectedText));
-    }
-
-    @Then("l'utilisateur vérifie dans linterface dadministration que la planification est prise en compte dans le menu")
-    public void lUtilisateurVérifieDansLinterfaceDadministrationQueLaPlanificationEstPriseEnCompteDansLeMenu() {
-
-        //TODO:faire un test pour vérifier que la planification est prise en compte dans le menu
-    }
-
-    @And("l'utilisateur clique de nouveau sur {string}")
-    public void lUtilisateurCliqueDeNouveauSur(String expectedText) {
-        manager.clickOnElement("im_back");
-        assertTrue(manager.verifyElementText("tv_geolocalisation",expectedText));
-        manager.clickOnElement("tv_geolocalisation");
-
-    }
-
-    @And("l'utilisateur clique sur Enregistrer")
-    public void lUtilisateurCliqueSurEnregistrer() {
-        manager.clickOnElement("tv_enregister");
-
-    }
-
-    @When("l'utilisateur clique sur Activer une fois après avoir ajusté la distance")
-    public void lUtilisateurCliqueSurActiverUneFoisAprèsAvoirAjustéLaDistance() {
-        manager.clickOnElement("tv_activate_once");
-
-    }
-
-    @When("l'utilisateur clique sur Désactiver")
-    public void lUtilisateurCliqueSurDésactiver() {
-
-        manager.clickOnElement("tv_deactivate");
-    }
 
     @And("utilisateur voit les champs {string} And {string} sur la page d'accueil")
     public void utilisateurVoitLesChampsAndSurLaPageDAccueil(String expectedText1, String expectedText2) {
@@ -652,6 +590,7 @@ public  class MyInformation extends BasePage{
     public void lEcranDeConnexionEstDeNouveauVisible() {
         System.out.println();
     }
+
 
 
 }

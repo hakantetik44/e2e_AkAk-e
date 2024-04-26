@@ -1,7 +1,6 @@
 package stepdefinitions;
 
 import static utils.Driver.getCurrentDriver;
-
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.cucumber.java.After;
@@ -26,7 +25,6 @@ import utils.OS;
 public class Hooks {
     public static String apk;
     public static String bundleId;
-
 
     private static final Map<String, String> apkMap = new HashMap<>();
     private static final List<String> availableApks = new ArrayList<>();
@@ -128,7 +126,7 @@ public class Hooks {
             }
             scenario.attach(screenshot, "image/png", "screenshot");
         }
-        //quitDriver();
+         quitDriver();
     }
 
     public static String getAppPackage(String app){
