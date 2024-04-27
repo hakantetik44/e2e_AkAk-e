@@ -14,7 +14,7 @@ Feature: Se connecter à overkiz
 
 
   @APPSV2-1134
-  Scenario Outline:  Modifications des informations personnelles
+  Scenario Outline: Modifications des informations personnelles
     Given Je lance mon app "<tag>"
     Given l'utilisateur souhaite modifier ses informations personnelles
     When il accède à l'application Overkiz pour accéder à son profil
@@ -28,9 +28,9 @@ Feature: Se connecter à overkiz
       | wisniowski  |
 
 
-  @kizconnect @hexaconnect @wisniowski @flexomV3 @APPSV2-1135
+   @APPSV2-1135
   Scenario Outline: Planification via la géolocalisation
-    Given l'utilisateur est sur lécran daccueil
+    Given Je lance mon app "<tag>"
     When l'utilisateur sélectionne le "Scénarios" pour la géolocalisation
     And l'utilisateur clique sur Géolocaliser
     Then trois actions sont possibles : Désactiver, Toujours activer, Activer une fois
@@ -45,14 +45,14 @@ Feature: Se connecter à overkiz
     And l'utilisateur clique sur Enregistrer
     Then l'utilisateur vérifie dans linterface dadministration que la planification est prise en compte dans le menu
     Examples:
-      | tag         |
-      | kizconnect  |
+      | tag        |
+      | kizconnect |
       | hexaconnect |
       | wisniowski  |
       | flexomV3    |
 
 
-  @kizconnect @hexaconnect @wisniowski @flexomV3 @APPSV2-1136
+  @APPSV2-1136
   Scenario Outline: Gestion des scénarios - Modifications
     Given  l'utilisateur est sur lécran daccueil
     When  l'utilisateur clique sur "Gérer mes accès secondaires" dans longlet "En plus"
@@ -61,12 +61,13 @@ Feature: Se connecter à overkiz
     Then l'accès secondaire est créé
     And  un écran récapitulatif des comptes secondaires existants apparaît
     Examples:
+      | tag         |
       | kizconnect  |
       | hexaconnect |
       | wisniowski  |
       | flexomV3    |
 
-  @kizconnect @hexaconnect @wisniowski  @flexomV3 @APPSV2-445
+  @APPSV2-445
   Scenario Outline: Piloter un équipement depuis l'écran d'exploitation
     Given  l'utilisateur est sur lécran daccueil
     When l'utilisateur navigue dans les pièces pour choisir léquipement à piloter

@@ -63,12 +63,8 @@ public class MyScenariosPage {
     public WebElement btnRS100io;
 
 
-
-
-
     @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"STD24\"]")
     public WebElement placeServeurDeConnexion;
-
 
 
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/et_login")
@@ -92,23 +88,41 @@ public class MyScenariosPage {
     public WebElement logoOverKizConnect; //
 
     public By
-            btnGeolocaliser = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/permission_allow_always_button") : By.id("Géolocaliser");
+            btnGeolocaliser = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_geolocalisation") : By.id("Géolocaliser");
 
     public By
-            btnAutoriserToujours = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/permission_allow_always_button") : By.id("Autoriser lorsque l'app est active");
+            btnAutoriserToujours = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/permission_allow_always_button") : By.xpath("(//XCUIElementTypeButton)[12]");
 
     public By
-            titleMesScenarios = OS.isAndroid() ?  By.xpath("//android.widget.TextView[@text=\"Scénarios\"]"): By.id("Mes scénarios");
+            titleMesScenarios = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Scénarios\"]") : By.id("Mes scénarios");
 
     public By
-            testScenario = OS.isAndroid() ?  By.xpath("//android.widget.TextView[@text=\"Scénarios\"]"): By.id("test");
+            testScenario = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Scénarios\"]") : By.id("test");
 
     public By
-            btnScenario = OS.isAndroid() ?  By.xpath("//android.widget.TextView[@text=\"Scénarios\"]"): By.id("Scénarios");
+            btnScenario = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Scénarios\"]") : By.id("Scénarios");
 
-    public String getAppName(String app){
-        if(OS.OS.equals("Android")){
-            switch (app){
+    public By
+            btnDesactiver = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_deactivate") : By.xpath("(//XCUIElementTypeButton)[10]");
+    public By
+            btnToujoursActiver = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_activate_always") : By.xpath("(//XCUIElementTypeButton)[11]");
+    public By
+            btnActiverUneFois = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_activate_once") : By.xpath("(//XCUIElementTypeButton)[12]");
+   public By
+            textDistanceDuDomicile = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/label_distance") : By.id("Distance du domicile");
+
+    public By
+            btnRetour = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/im_back") : By.xpath("(//XCUIElementTypeButton)[9]");
+
+    public By
+            btnEnregister = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_enregister") : By.id("Enregistrer");
+
+
+
+
+    public String getAppName(String app) {
+        if (OS.OS.equals("Android")) {
+            switch (app) {
                 case "kizconnect.apk":
                     return "kizconnect";
                 case "FlexomV3.apk":
