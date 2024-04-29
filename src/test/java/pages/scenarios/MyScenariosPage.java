@@ -59,7 +59,7 @@ public class MyScenariosPage {
 
 
     public WebElement btnOXIMOio;
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"RS100 io\"]")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Géolocaliser\"]")
     public WebElement btnRS100io;
 
 
@@ -94,13 +94,13 @@ public class MyScenariosPage {
             btnAutoriserToujours = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/permission_allow_always_button") : By.xpath("(//XCUIElementTypeButton)[12]");
 
     public By
-            titleMesScenarios = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Scénarios\"]") : By.id("Mes scénarios");
+            titleMesScenarios = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/label_title") : By.id("Mes scénarios");
 
     public By
-            testScenario = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Scénarios\"]") : By.id("test");
+            testScenario = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/name") : By.id("test");
 
     public By
-            btnScenario = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Scénarios\"]") : By.id("Scénarios");
+            btnScenario = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/nav_scenario") : By.id("Scénarios");
 
     public By
             btnDesactiver = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_deactivate") : By.xpath("(//XCUIElementTypeButton)[10]");
@@ -117,7 +117,8 @@ public class MyScenariosPage {
     public By
             btnEnregister = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_enregister") : By.id("Enregistrer");
 
-
+    public By
+            progressBarr = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/progress_distance") : By.id("Enregistrer");
 
 
     public String getAppName(String app) {

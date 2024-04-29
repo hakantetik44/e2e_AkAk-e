@@ -518,29 +518,7 @@ public  class MyInformation extends BasePage{
     public void lUtilisateurDevraitVoirLétoilePermettantDePlacerLéquipementEnFavori() {
     }
 
-    @When("l'utilisateur clique sur {string}")
-    public void lUtilisateurCliqueSur(String arg0) {
-    }
 
-    @Then("l'équipement devrait être ouvert")
-    public void lÉquipementDevraitÊtreOuvert() {
-    }
-
-    @Then("l'équipement devrait être fermé")
-    public void lÉquipementDevraitÊtreFermé() {
-    }
-
-    @Then("l'équipement devrait sarrêter")
-    public void lÉquipementDevraitSarrêter() {
-    }
-
-    @Then("l'équipement devrait être allumé")
-    public void lÉquipementDevraitÊtreAllumé() {
-    }
-
-    @Then("l'équipement devrait être éteint")
-    public void lÉquipementDevraitÊtreÉteint() {
-    }
 
     @When("l'utilisateur lit les informations du capteur")
     public void lUtilisateurLitLesInformationsDuCapteur() {

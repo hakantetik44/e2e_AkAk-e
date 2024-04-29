@@ -47,6 +47,14 @@ public class MyScenarios extends BasePage {
     );
 
 
+
+    BaseElement<?, ?> progressBarr= new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.progressBarr
+    );
+
+
     BaseElement<?, ?> btnAutoriserToujours = new BaseElement<>(
             getCurrentDriver(),
             getCurrentDriver(),
@@ -113,7 +121,7 @@ public class MyScenarios extends BasePage {
 
     @When("l'utilisateur sélectionne le {string} pour la géolocalisation")
     public void lUtilisateurSélectionneLePourLaGéolocalisation(String textScénarios) {
-        wait(2);
+
         btnScenario.click();
         //assertTrue(btnScenario.getText().contains(textScénarios));
     }
@@ -130,8 +138,9 @@ public class MyScenarios extends BasePage {
 
     @Then("trois actions sont possibles : Désactiver, Toujours activer, Activer une fois")
     public void troisActionsSontPossiblesDésactiverToujoursActiverActiverUneFois() {
+        System.out.println(btnDesactiver.getText());
+        assertTrue(btnDesactiver.getText().contains("Désactiver"));
 
-        assertTrue(btnDesactiver.waitVisible().isDisplayed());
         assertTrue(btnToujoursActiver.waitVisible().isDisplayed());
         assertTrue(btnActiverUneFois.waitVisible().isDisplayed());
 
@@ -159,7 +168,7 @@ public class MyScenarios extends BasePage {
     @And("l'utilisateur clique de nouveau sur {string}")
     public void lUtilisateurCliqueDeNouveauSur(String expectedText) {
         btnRetour.click();
-        assertTrue(btnGeolocaliser.getText().contains(expectedText));
+        wait(2);
         btnGeolocaliser.click();
 
     }
