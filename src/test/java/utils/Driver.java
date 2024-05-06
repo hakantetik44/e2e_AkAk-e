@@ -26,7 +26,7 @@ public class Driver {
             .amend("appium:wdaLocalPort", "7100")
             .amend("appium:platformName", "Android")
             .amend("appium:app", "/Users/hakan/IdeaProjects/e2e_overkiz/src/test/resources/Apps/" + Hooks.apk)
-            .amend("appium:connectHardwareKeyboard", true)
+            .amend("appium:connectHardwareKeyboard", false)
             .amend("appium:appWaitPackage", Hooks.getAppPackage(Hooks.apk))
             .amend("appium:newCommandTimeout", 3600);
         return options;

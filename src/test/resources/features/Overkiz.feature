@@ -52,22 +52,55 @@ Feature: Se connecter à overkiz
       | flexomV3    |
 
 
-
-  Scenario: Gestion des scénarios - Ajout d'équipements
+  Scenario Outline: Gestion des scénarios - Ajout d'équipements
     Given Je lance mon app "<tag>"
-    When l'utilisateur sélectionne le "Scénarios" pour la géolocalisation
+    When l'utilisateur sélectionne le "Scénarios"
     And l'utilisateur clique sur "Ajoutez un équipement"
-    And l'utilisateur sélectionne l'équipement à ajouter
-    And l'utilisateur ne choisit pas d'action à réaliser lors de l'exécution du scénario
-    Then l'utilisateur clique sur "Valider"
-    And l'utilisateur ne choisit pas d'action à réaliser lors de l'exécution du scénario
-    Then l'utilisateur clique sur "Valider"
-    And l'utilisateur clique sur "Terminer"
-    And l'utilisateur choisit une action à réaliser lors de l'exécution du scénario
-    Then l'utilisateur clique sur "Valider"
-    And l'utilisateur clique sur "Terminer"
+    And l'utilisateur sélectionne léquipement à ajouter
+    Then l'utilisateur clique sur Terminer
+    And l'utilisateur resélectionne léquipement à ajouter
+    And l'utilisateur choisit une action à réaliser lors de lexécution du scénario
+    Then l'utilisateur clique sur Valider
+    And le message de mis à jour avec succès devrait s'afficher
+
+    Examples:
+      | tag         |
+      | kizconnect  |
+      | hexaconnect |
+      | flexomV3    |
 
 
+
+  Scenario Outline: Création et suppression scénario avec ajout d'équipements
+    Given Je lance mon app "<tag>"
+    When l'utilisateur sélectionne le Scénarios
+    And l'utilisateur clique sur Créer un scénario
+    And l'utilisateur nomme le scénario dans le champ "Nom du scénario"
+    And l'utilisateur choisit licône du scénario
+    And l'utilisateur clique sur Suivant
+    And l'utilisateur choisit léquipement à ajouter au scénario
+    And l'utilisateur ne choisit pas la position de léquipement
+    And l'utilisateur clique sur Valider
+    And l'utilisateur verifie léquipement à ajouter au scénario
+    And l'utilisateur clique sur Terminer
+    And le message de créé devrait s'afficher
+    And l'utilisateur choisit une action à réaliser lors de lexécution du scénario
+    Then l'utilisateur clique sur Valider
+    And le message de mis à jour avec succès devrait s'afficher
+    And  l'utilisateur clique sur le bouton retour
+    Then l'utilisateur sélectionne un scénario à supprimer
+    And l'utilisateur le fait glisser vers la gauche
+    Then le pop-up "Êtes-vous sûr de vouloir supprimer ce scénario ?" s'affiche
+    And l'utilisateur clique sur Supprimer
+    And le message de suppression avec succès devrait s'afficher
+    And l'utilisateur contrôler les données sur ladmin
+
+    Examples:
+      | tag         |
+      | kizconnect  |
+      | hexaconnect |
+      | wisniowski  |
+      | flexomV3    |
 
 
   @APPSV2-1136
@@ -79,11 +112,11 @@ Feature: Se connecter à overkiz
     Then l'accès secondaire est créé
     And  un écran récapitulatif des comptes secondaires existants apparaît
     Examples:
-      | tag         |
-      | kizconnect  |
-      | hexaconnect |
-      | wisniowski  |
-      | flexomV3    |
+      | tag        |
+      | kizconnect |
+      | hexaconnect|
+      | wisniowski |
+
 
 
 

@@ -5,7 +5,9 @@ import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.net.MalformedURLException;
@@ -22,12 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 
 public class BasePage {
@@ -57,6 +53,30 @@ public class BasePage {
 
     }
 
+
+    private static int calculateOffsetForLeftScroll(int scrollAmount) throws MalformedURLException, InterruptedException {
+        Dimension dimension = getCurrentDriver().manage().window().getSize();
+        return ((scrollAmount * dimension.width) / 100);
+    }
+
+    public static void scrollLeft(WebElement element, int scrollPercentage) throws MalformedURLException, InterruptedException {
+        Actions actions = new Actions(getCurrentDriver());
+        int xOffset = calculateOffsetForLeftScroll(scrollPercentage);
+        int yOffset = element.getSize().getHeight() / 2;
+        actions.clickAndHold(element)
+                .moveToElement(element, -xOffset, yOffset)
+                .release()
+                .perform();
+    }
+
+    public static void swipe(WebElement element, String direction, double percent, int speed){
+      getCurrentDriver().executeScript("mobile: swipeGesture", ImmutableMap.of(
+                "elementId", ((RemoteWebElement) element).getId(),
+                "direction", direction,
+                "percent", percent,
+                "speed", speed
+        ));
+    }
 
 
     public void scrollFromButtomToUp() throws InterruptedException, MalformedURLException {
@@ -289,6 +309,12 @@ public class BasePage {
     private void resetImplicitlyWait() {
         getCurrentDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     }
+
+
+
+
+
+
 }
 
 

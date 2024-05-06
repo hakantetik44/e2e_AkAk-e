@@ -11,7 +11,6 @@ import stepdefinitions.Hooks;
 import utils.Driver;
 import utils.OS;
 
-
 public class MyInformationPage {
 
     public String appName = getAppName(Hooks.apk);
@@ -21,7 +20,6 @@ public class MyInformationPage {
         PageFactory.initElements(new AppiumFieldDecorator(Driver.getCurrentDriver()), this);
 
     }
-
 
     @AndroidFindBy(xpath = "(//android.widget.RadioButton)[2]")
     public WebElement serverStd;
@@ -71,7 +69,6 @@ public class MyInformationPage {
 
     @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"STD24\"]")
     public WebElement placeServeurDeConnexion;
-
 
 
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/et_login")
@@ -157,6 +154,10 @@ public class MyInformationPage {
 
     public By
           placeNuméroParselle = OS.isAndroid() ? By.xpath("//android.widget.EditText[@text=\"2202-5934-6827\"]") : By.xpath("(//XCUIElementTypeStaticText)[19]");
+
+   public By
+          btnRetour= OS.isAndroid() ?  By.id("com.overkiz."+appName+":id/ic_back") : By.id("OK");
+
 
     public String getAppName(String app){
         if(OS.OS.equals("Android")){

@@ -80,7 +80,8 @@ public class Hooks {
             }
             scenario.attach(screenshot, "image/png", "screenshot");
         }
-        quitDriver();
+
+    quitDriver();
     }
 
     public static String getAppPackage(String app){

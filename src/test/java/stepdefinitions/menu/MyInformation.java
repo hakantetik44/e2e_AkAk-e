@@ -197,6 +197,15 @@ public  class MyInformation extends BasePage{
 
     );
 
+
+
+    BaseElement<?, ?> btnRetour= new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.btnRetour
+
+    );
+
     BaseElement<?, ?> placeLeverDeSoleil= new BaseElement<>(
             getCurrentDriver(),
             getCurrentDriver(),
@@ -554,10 +563,6 @@ public  class MyInformation extends BasePage{
         System.out.println();
     }
 
-    @And("Je clique sur {string}")
-    public void jeCliqueSur(String arg0) {
-        System.out.println();
-    }
 
     @Then("L’application pointe sur le serveur sélectionné")
     public void lApplicationPointeSurLeServeurSelectionne() {

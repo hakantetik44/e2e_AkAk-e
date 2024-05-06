@@ -58,10 +58,6 @@ public class MyScenariosPage {
     public WebElement invalidSnackbarText;
 
 
-    public WebElement btnOXIMOio;
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Géolocaliser\"]")
-    public WebElement btnRS100io;
-
 
     @AndroidFindBy(xpath = "//android.widget.EditText[@text=\"STD24\"]")
     public WebElement placeServeurDeConnexion;
@@ -75,17 +71,28 @@ public class MyScenariosPage {
     @AndroidFindBy(id = "com.overkiz.kizconnect:id/et_confirm_pw")
     public WebElement placeComteSecondaiConfirmerMDP;
 
-    @AndroidFindBy(id = "com.overkiz.kizconnect:id/tv_valide")
-    public WebElement btnCréer;
-
-    @AndroidFindBy(xpath = "(//android.widget.TextView)[3]")
-    public WebElement btnNotification;
 
     @iOSXCUITFindBy(iOSNsPredicate = "name == \"ic_login_logo\"")
     public WebElement logoOvezKizIos;
 
     @AndroidFindBy(xpath = "(//android.widget.ImageView)[2]")
     public WebElement logoOverKizConnect; //
+
+
+    public By
+            btnLogement= OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Logement\"]") : By.xpath("//XCUIElementTypeStaticText[@name=\"Logement\"]");
+
+    public By
+            btnOximoIo= OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/name") : By.id("OXIMO io");
+
+    public By
+            btnTerminer= OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_validate") : By.id("Terminer");
+
+    public By
+            btnValider= OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_valid") : By.id("Valider");
+
+    public By
+            btnAjouterUnEquipement= OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_add") : By.xpath("(//XCUIElementTypeOther/XCUIElementTypeButton)[7]");
 
     public By
             btnGeolocaliser = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_geolocalisation") : By.id("Géolocaliser");
@@ -112,7 +119,11 @@ public class MyScenariosPage {
             textDistanceDuDomicile = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/label_distance") : By.id("Distance du domicile");
 
     public By
-            btnRetour = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/im_back") : By.xpath("(//XCUIElementTypeButton)[9]");
+            btnRetour = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/ic_back") : By.xpath("(//XCUIElementTypeButton)[9]");
+
+    public By
+            btnSupprimer = OS.isAndroid() ? By.xpath("//android.widget.Button[@text=\"SUPPRIMER\"]") : By.xpath("(//XCUIElementTypeButton)[9]");
+
 
     public By
             btnEnregister = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_enregister") : By.id("Enregistrer");
@@ -120,6 +131,36 @@ public class MyScenariosPage {
     public By
             progressBarr = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/progress_distance") : By.id("Enregistrer");
 
+    public By
+            snackbarText= OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/snackbar_text") : By.xpath("//XCUIElementTypeStaticText[starts-with(@name, 'Le scénario ') and (contains(@name, 'créé avec succès') or contains(@name, 'mis à jour avec succès') or contains(@name, 'a été supprimé'))]");
+
+    public By
+            btnFermer= OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_off") : By.xpath("//XCUIElementTypeStaticText[@name=\"Fermer\"]");
+
+    public By
+            btnOuvrir= OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_on") : By.id("Ouvrir");
+
+    public By
+            btnCréerUnScénario= OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/addTitle") : By.xpath("(//XCUIElementTypeOther/XCUIElementTypeButton)[1]");
+
+    public By
+            btnNommezScénario= OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/et_piece_name") : By.xpath("//XCUIElementTypeTextField");
+
+    public By
+            iconeScénario = OS.isAndroid() ? By.xpath("//android.widget.ImageView[5]") : By.id("scenario_movie");
+
+    public By
+            textSupprimer = OS.isAndroid() ? By.xpath("//android.widget.TextView[@resource-id=\"android:id/message\"]"): By.id("Suivant");
+
+    public By
+            btnSuivant = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_next") : By.id("Suivant");
+
+
+
+    public By
+            getBtnScenario2 = OS.isAndroid() ? By.xpath("//android.view.ViewGroup[2]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Adresse\"]");
+    public By
+          getIconeSelectionné   = OS.isAndroid() ? By.xpath("//android.widget.ViewSwitcher/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.ImageView[2]") : By.id("check");
 
     public String getAppName(String app) {
         if (OS.OS.equals("Android")) {
