@@ -119,10 +119,14 @@ public class MyScenariosPage {
             textDistanceDuDomicile = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/label_distance") : By.id("Distance du domicile");
 
     public By
-            btnRetour = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/ic_back") : By.xpath("(//XCUIElementTypeButton)[9]");
+            btnRetour = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/ic_back") : By.id("ic arrow left");
 
     public By
-            btnSupprimer = OS.isAndroid() ? By.xpath("//android.widget.Button[@text=\"SUPPRIMER\"]") : By.xpath("(//XCUIElementTypeButton)[9]");
+            btnSupprimer = OS.isAndroid() ? By.xpath("//android.widget.Button[@text=\"SUPPRIMER\"]") : By.xpath("//XCUIElementTypeStaticText[@name=\"Supprimer\"]");
+
+    public By
+            btnSupprimerIosPlus = OS.isAndroid() ? By.xpath("//android.widget.Button[@text=\"SUPPRIMER\"]") : By.xpath("(//XCUIElementTypeButton[@name=\"ic delete\"])[2]");
+
 
 
     public By
@@ -150,17 +154,25 @@ public class MyScenariosPage {
             iconeScénario = OS.isAndroid() ? By.xpath("//android.widget.ImageView[5]") : By.id("scenario_movie");
 
     public By
-            textSupprimer = OS.isAndroid() ? By.xpath("//android.widget.TextView[@resource-id=\"android:id/message\"]"): By.id("Suivant");
+            textSupprimer = OS.isAndroid() ? By.xpath("//android.widget.TextView[@resource-id=\"android:id/message\"]"): By.id("Êtes-vous sûr de vouloir supprimer ce scénario ?");
 
     public By
             btnSuivant = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/tv_next") : By.id("Suivant");
 
-
+    public By
+            btnPlayAndroid = OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/play") : By.id("Suivant");
 
     public By
-            getBtnScenario2 = OS.isAndroid() ? By.xpath("//android.view.ViewGroup[2]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Adresse\"]");
+            getBtnScenario2 = OS.isAndroid() ? By.xpath("//android.view.ViewGroup[2]") : By.xpath("(//XCUIElementTypeCell)[2]");
     public By
           getIconeSelectionné   = OS.isAndroid() ? By.xpath("//android.widget.ViewSwitcher/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.ImageView[2]") : By.id("check");
+
+    public By
+            btnLogoPlayAndStop    = OS.isAndroid() ? By.xpath("//android.widget.ViewSwitcher/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.ImageView[2]") : By.id("add scene");
+
+    public By
+         btnStop =OS.isAndroid() ? By.id("com.overkiz." + appName + ":id/loading") : By.id("STOP");
+
 
     public String getAppName(String app) {
         if (OS.OS.equals("Android")) {

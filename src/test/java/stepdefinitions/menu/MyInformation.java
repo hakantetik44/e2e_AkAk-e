@@ -455,11 +455,7 @@ public  class MyInformation extends BasePage{
     }
 
 
-    @When("l'utilisateur clique sur {string} dans longlet {string}")
-    public void lUtilisateurCliqueSurDansLonglet(String textGérerMesAccés, String textEnPlus) {
 
-
-    }
 
     @And("il saisi l'adresse e-mail et le mot de passe du compte secondaire")
     public void ilSaisiLAdresseEMailEtLeMotDePasseDuCompteSecondaire() {
@@ -472,23 +468,6 @@ public  class MyInformation extends BasePage{
     }
 
 
-    @And("il clique sur le bouton {string} en bas")
-    public void ilCliqueSurLeBoutonEnBas(String textCréer) {
-        assertTrue(overkiz.btnCréer.getText().contains(textCréer));
-        overkiz.btnCréer.click();
-
-
-    }
-
-    @Then("l'accès secondaire est créé")
-    public void lAccèsSecondaireEstCréé() {
-
-    }
-
-    @And("un écran récapitulatif des comptes secondaires existants apparaît")
-    public void unÉcranRécapitulatifDesComptesSecondairesExistantsApparaît() {
-
-    }
 
 
     @When("l'utilisateur navigue dans les pièces pour choisir léquipement à piloter")

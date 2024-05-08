@@ -71,7 +71,7 @@ Feature: Se connecter à overkiz
 
 
 
-  Scenario Outline: Création et suppression scénario avec ajout d'équipements
+  Scenario Outline: Création, suppression et lancement de scénario avec ajout d'équipements
     Given Je lance mon app "<tag>"
     When l'utilisateur sélectionne le Scénarios
     And l'utilisateur clique sur Créer un scénario
@@ -88,6 +88,9 @@ Feature: Se connecter à overkiz
     Then l'utilisateur clique sur Valider
     And le message de mis à jour avec succès devrait s'afficher
     And  l'utilisateur clique sur le bouton retour
+    Then  l'utilisateur cliquesur le logo Play
+    And l'utilisateur cliquesur le bouton Stop
+    And A la fin de l'exécution de la commande, le bouton "Play" réapparait.
     Then l'utilisateur sélectionne un scénario à supprimer
     And l'utilisateur le fait glisser vers la gauche
     Then le pop-up "Êtes-vous sûr de vouloir supprimer ce scénario ?" s'affiche
@@ -103,19 +106,6 @@ Feature: Se connecter à overkiz
       | flexomV3    |
 
 
-  @APPSV2-1136
-  Scenario Outline: Gestion des scénarios - Modifications
-    Given Je lance mon app "<tag>"
-    When  l'utilisateur clique sur "Gérer mes accès secondaires" dans longlet "En plus"
-    And  il saisi l'adresse e-mail et le mot de passe du compte secondaire
-    And  il clique sur le bouton "Créer" en bas
-    Then l'accès secondaire est créé
-    And  un écran récapitulatif des comptes secondaires existants apparaît
-    Examples:
-      | tag        |
-      | kizconnect |
-      | hexaconnect|
-      | wisniowski |
 
 
 

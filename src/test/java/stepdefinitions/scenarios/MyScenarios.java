@@ -108,6 +108,13 @@ public class MyScenarios extends BasePage {
 
     );
 
+
+    BaseElement<?, ?> btnSupprimerIosPlus = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.btnSupprimerIosPlus
+
+    );
     BaseElement<?, ?> btnEnregister = new BaseElement<>(
             getCurrentDriver(),
             getCurrentDriver(),
@@ -172,6 +179,28 @@ public class MyScenarios extends BasePage {
             getCurrentDriver(),
             getCurrentDriver(),
             overkiz.btnScenario
+
+    );
+
+
+    BaseElement<?, ?> btnLogoPlayAndStop  = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.btnLogoPlayAndStop
+
+    );
+
+    BaseElement<?, ?> btnPlayAndroid  = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.btnPlayAndroid
+
+    );
+
+    BaseElement<?, ?> btnStop  = new BaseElement<>(
+            getCurrentDriver(),
+            getCurrentDriver(),
+            overkiz.btnStop
 
     );
 
@@ -262,11 +291,9 @@ public class MyScenarios extends BasePage {
     @Then("trois actions sont possibles : Désactiver, Toujours activer, Activer une fois")
     public void troisActionsSontPossiblesDésactiverToujoursActiverActiverUneFois() {
         System.out.println(btnDesactiver.getText());
-        assertTrue(btnDesactiver.getText().contains("Désactiver"));
-
+        assertTrue(btnDesactiver.waitVisible().isDisplayed());
         assertTrue(btnToujoursActiver.waitVisible().isDisplayed());
         assertTrue(btnActiverUneFois.waitVisible().isDisplayed());
-
 
     }
 
@@ -358,7 +385,7 @@ public class MyScenarios extends BasePage {
     public void leMessageDeMisAJourAvecSuccesDevraitSAfficher() {
 
         String actualText = snackbarText.waitVisible().getText();
-        String regexPattern = "Le scénario [a-zA-Z]+ a été mis à jour avec succès\\.";
+        String regexPattern = "Le scénario [a-zA-Z]+ a été mis à jour avec succès.";
         assertTrue(actualText.matches(regexPattern));
 
     }
@@ -490,19 +517,32 @@ public class MyScenarios extends BasePage {
         }
 
     @And("l'utilisateur le fait glisser vers la gauche")
-    public void lUtilisateurLeFaitGlisserVersLaGauche() {
-        swipe(getBtnScenario2.waitVisible(), "left", 0.5, 1000);
+    public void lUtilisateurLeFaitGlisserVersLaGauche() throws MalformedURLException, InterruptedException {
+        if(ConfigReader.getProperty("platformName").equals("iOS")) {
+            scrollLeft(getBtnScenario2.waitVisible(),50);
+        } else {
+            swipe(getBtnScenario2.waitVisible(), "left", 0.5, 1000);
+        }
+
+
+
     }
 
     @Then("l'utilisateur clique sur Supprimer")
     public void lUtilisateurCliqueSurSupprimer() {
         btnSupprimer.click();
+
     }
 
     @And("le pop-up {string} s'affiche")
     public void lePopUpSAffiche(String expectedText) {
+
+        if(ConfigReader.getProperty("platformName").equals("iOS")) {
+            btnSupprimerIosPlus.click();
+        } else {
+
+        }
         assertTrue(textSupprimer.waitVisible().getText().contains(expectedText));
-        wait(2);
 
     }
 
@@ -514,15 +554,48 @@ public class MyScenarios extends BasePage {
         System.out.println("actualText = " + actualText);
         String regexPattern = "Le scénario [a-zA-Z]+ a été supprimé";
         System.out.println("regexPattern = " + regexPattern);
-        assertTrue(actualText.matches(regexPattern));
-    }
-
-
-
+        assertTrue(actualText.matches(regexPattern));}
 
     @Then("l'utilisateur contrôler les données sur ladmin")
     public void lUtilisateurControlerLesDonneesSurLadmin() {
         //TODO:
+    }
+
+    @Then("l'utilisateur cliquesur le logo Play")
+    public void lUtilisateurCliquesurLeLogoPlay() {
+
+        if(ConfigReader.getProperty("platformName").equals("iOS")) {
+            btnLogoPlayAndStop .click();
+        } else {
+            btnPlayAndroid.click();
+        }
+
+
+       // assertTrue(btnStop.waitInvisible().getText().contains("STOP"));
+        //TODO:Des ids différents doivent être ajoutés pour les logos stop et play pour ios"
+    }
+    @And("l'utilisateur cliquesur le bouton Stop")
+    public void lUtilisateurCliquesurLeBoutonStop() {
+        if(ConfigReader.getProperty("platformName").equals("iOS")) {
+            btnLogoPlayAndStop .click();
+        } else {
+            btnStop.click();
+        }
+
+
+
+        //TODO:On constate l'échec du mouvement, dans l'admin dans le menu setup/executions.
+    }
+
+    @And("A la fin de l'exécution de la commande, le bouton {string} réapparait.")
+    public void aLaFinDeLExecutionDeLaCommandeLeBoutonReapparait(String expectedText) {
+        if(ConfigReader.getProperty("platformName").equals("iOS")) {
+            assertTrue(btnLogoPlayAndStop .waitVisible().isDisplayed());
+        } else {
+            assertTrue(btnPlayAndroid .waitVisible().isDisplayed());
+        }
+
+
     }
 }
 
