@@ -11,13 +11,15 @@ import stepdefinitions.Hooks;
 import utils.Driver;
 import utils.OS;
 
+import static utils.Driver.getCurrentDriver;
+
 public class MyInformationPage {
 
     public String appName = getAppName(Hooks.apk);
 
     public MyInformationPage() throws MalformedURLException, InterruptedException {
 
-        PageFactory.initElements(new AppiumFieldDecorator(Driver.getCurrentDriver()), this);
+        PageFactory.initElements(new AppiumFieldDecorator(getCurrentDriver()), this);
 
     }
 
@@ -96,67 +98,12 @@ public class MyInformationPage {
     public By
             btnEnplus = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/nav_more") : By.id("En plus");
 
-    public By
-            btnMesInfo = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/label_google_assistant") : By.id("Mes informations personnelles ");
+    public void clickBtnEnPlus() {
+        By btnEnplus = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/nav_more") : By.id("En plus");
+        getCurrentDriver().findElement(btnEnplus).click();
+    }
 
-    public By
-            listText = OS.isAndroid() ? By.className("android.widget.EditText") : By.linkText("Nom");
 
-    public By
-            placeEmail = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[4]") :  By.name("valueLabel_UserInfoCell");
-
-    public By
-            textNom = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Nom\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Nom\"]");
-
-    public By
-            textPreNom = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Prénom\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Prénom\"]");
-    public By
-            textEmail = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Email\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Email\"]");
-
-    public By
-            textAdresse = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Adresse\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Adresse\"]");
-
-    public By
-            textFuseauHoraire = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Fuseau horaire\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Fuseau horaire\"]");
-    public By
-            textCoordonnéesGPS = OS.isAndroid() ? By.xpath("//android.widget.TextView[@text=\"Coordonnées GPS\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Coordonnées GPS\"]");
-
-    public By
-            placeLabelNom = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[1]") : By.xpath("(//XCUIElementTypeImage[@name=\"editableImageView_UserInfoCell\"])[1]");
-
-    public By
-            placeLabelPrenom = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[2]") : By.xpath("(//XCUIElementTypeImage[@name=\"editableImageView_UserInfoCell\"])[2]");
-
-    public By
-            placeLabelTelephone = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[3]") : By.xpath("(//XCUIElementTypeImage[@name=\"editableImageView_UserInfoCell\"])[3]");
-
-    public By
-            placeLabelEmail = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[4]") : By.xpath("(//XCUIElementTypeImage[@name=\"editableImageView_UserInfoCell\"])[4]");
-    public By
-            placeLabelAdresse = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[5]") : By.xpath("(//XCUIElementTypeImage[@name=\"editableImageView_UserInfoCell\"])[5]");
-    public By
-           placeHolderMesInformation = OS.isAndroid() ?  By.id("com.overkiz."+appName+":id/et_email") : By.xpath("(//XCUIElementTypeTextField)[1]");
-
-    public By
-            btnOk = OS.isAndroid() ?  By.id("com.overkiz."+appName+":id/tv_ok") : By.id("OK");
-
-    public By
-            snackbarText = OS.isAndroid() ?  By.id("com.overkiz."+appName+":id/snackbar_text") : By.id("Votre profil a été mis à jour");
-
-    public By
-            placeFuseauHoraire = OS.isAndroid() ? By.xpath("//android.widget.EditText[@text=\"Europe/Paris\"]") : By.xpath("//XCUIElementTypeStaticText[@label=\"Europe/Paris\"]");
-
-    public By
-            placeCoordonnées = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[4]") : By.xpath("(//XCUIElementTypeStaticText)[15]");
-
-    public By
-          placeLeverDeSoleil = OS.isAndroid() ? By.xpath("(//android.widget.EditText)[5]") : By.xpath("(//XCUIElementTypeStaticText)[17]");
-
-    public By
-          placeNuméroParselle = OS.isAndroid() ? By.xpath("//android.widget.EditText[@text=\"2202-5934-6827\"]") : By.xpath("(//XCUIElementTypeStaticText)[19]");
-
-   public By
-          btnRetour= OS.isAndroid() ?  By.id("com.overkiz."+appName+":id/ic_back") : By.id("OK");
 
 
     public String getAppName(String app){

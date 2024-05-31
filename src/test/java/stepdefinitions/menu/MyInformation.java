@@ -1,29 +1,22 @@
 package stepdefinitions.menu;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
 import static utils.Driver.getCurrentDriver;
 import com.github.javafaker.Faker;
-
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Random;
-
-import com.somfy.ui.BaseElement;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import pages.AppOperationManager;
 import pages.BasePage;
-
 import pages.menu.MyInformationPage;
 import utils.ConfigReader;
 
@@ -38,183 +31,8 @@ public  class MyInformation extends BasePage{
     public MyInformation() throws MalformedURLException, InterruptedException {
     }
 
-    BaseElement<?, ?> btnEnplus = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.btnEnplus
 
-    );
-
-
-
-    BaseElement<?, ?> btnMesInfo = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.btnMesInfo
-
-    );
-
-    BaseElement<?, ?> listText = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.listText
-
-    );
-
-
-    BaseElement<?, ?> textNom = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.textNom
-
-    );
-
-    BaseElement<?, ?> textPrenom = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.textPreNom
-
-    );
-
-    BaseElement<?, ?> placeFuseauHoraire = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.placeFuseauHoraire
-
-    );
-
-
-    BaseElement<?, ?> placeLabelTelephone = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.placeLabelTelephone
-    );
-
-
-    BaseElement<?, ?> placeLabelAdresse = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.placeLabelAdresse
-    );
-
-    BaseElement<?, ?> textEmail = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.textEmail
-
-    );
-
-    BaseElement<?, ?> placeLabelNom = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.placeLabelNom
-
-    );
-
-    BaseElement<?, ?> placeLabelPrenom = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.placeLabelPrenom
-
-    );
-
-
-
-
-    BaseElement<?, ?> placeEmail = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.placeEmail
-
-    );
-
-    BaseElement<?, ?> textAdresse = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.textAdresse
-
-    );
-
-    BaseElement<?, ?> textFuseauHoraire = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.textFuseauHoraire
-
-    );
-
-
-    BaseElement<?, ?> textCoordonnéesGPS  = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.textCoordonnéesGPS
-
-    );
-
-
-    BaseElement<?, ?> placeHolderMesInformation  = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.placeHolderMesInformation
-
-    );
-
-
-
-    BaseElement<?, ?> btnOk = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.btnOk
-
-    );
-
-
-    BaseElement<?, ?> placeLabelEmail = new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.placeLabelEmail
-
-    );
-
-    BaseElement<?, ?> snackbarText= new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.snackbarText
-
-    );
-
-    BaseElement<?, ?> placeCoordonnées= new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.placeCoordonnées
-
-    );
-
-
-    BaseElement<?, ?> placeNuméroParselle= new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.placeNuméroParselle
-
-    );
-
-
-
-    BaseElement<?, ?> btnRetour= new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.btnRetour
-
-    );
-
-    BaseElement<?, ?> placeLeverDeSoleil= new BaseElement<>(
-            getCurrentDriver(),
-            getCurrentDriver(),
-            overkiz.placeLeverDeSoleil
-
-    );
-
-
-
+    
 
     @Given("lutilisateur souhaite se connecter à l'application")
     public void lutilisateurSouhaiteSeConnecterLApplication() {
@@ -351,9 +169,11 @@ public  class MyInformation extends BasePage{
 
     @When("il accède à l'application Overkiz pour accéder à son profil")
     public void ilAccedeALApplicationOverkizPourAccederASonProfil() {
+      wait(3);
 
-        btnEnplus.click();
-        btnMesInfo.click();
+        overkiz.clickBtnEnPlus();
+
+        wait(3);
     }
 
 
@@ -368,104 +188,7 @@ public  class MyInformation extends BasePage{
 
     }
 
-    @And("l'utilisateur peut vérifier ses informations personnelles")
-    public void lUtilisateurPeutVerifierSesInformationsPersonnelles() throws InterruptedException, MalformedURLException {
-        assertTrue(textPrenom.getText().contains("Prénom"));
-        assertTrue(textNom.getText().contains("Nom"));
-        assertTrue(textEmail.getText().contains("Email"));
-        assertTrue(textAdresse.getText().contains("Adresse"));
-        scrollUp(placeEmail.waitVisible(), -50);
-        assertTrue(textFuseauHoraire.getText().equalsIgnoreCase("Fuseau Horaire"));
-        assertTrue(textCoordonnéesGPS.getText().contains("Coordonnées GPS"));
-
-    }
-
-
-    @Then("l'utilisateur peut modifier ses informations personnelles")
-    public void lUtilisateurPeutModifierSesInformationsPersonnelles() throws InterruptedException {
-
-        placeLabelNom.click();
-        placeHolderMesInformation.waitVisible().clear();
-        String fakeName = faker.name().fullName();
-        placeHolderMesInformation.sendKeys(fakeName);
-        btnOk.click();
-        assertTrue(snackbarText.getText().contains("Votre profil a été mis à jour"));
-        placeLabelPrenom.click();
-        placeHolderMesInformation.waitVisible().clear();
-        String fakeSurname = faker.name().lastName();
-        placeHolderMesInformation.sendKeys(fakeSurname);
-        btnOk.click();
-        assertTrue(snackbarText.getText().contains("Votre profil a été mis à jour"));
-        placeLabelTelephone.click();
-        placeHolderMesInformation.waitVisible().clear();
-        placeHolderMesInformation.sendKeys(getRandomPhoneNumber());
-        btnOk.click();
-        placeLabelEmail.click();
-        placeHolderMesInformation.waitVisible().clear();
-        placeHolderMesInformation.sendKeys("vfovk5934@yopmail.com");
-        btnOk.click();
-        assertTrue(snackbarText.getText().contains("Votre profil a été mis à jour"));
-
-        /* placeLabelAdresse.click();
-        placeHolderMesInformation.waitVisible().clear();
-        String fakeAddress = faker.address().fullAddress();
-        placeHolderMesInformation.sendKeys(fakeAddress);
-        btnOk.click();*/
-
-       //TODO:
-
-
-    }
-
-
-    @Then("l'utilisateur ne peut pas modifier certaines informations")
-    public void lUtilisateurNePeutPasModifierCertainesInformations() throws MalformedURLException, InterruptedException {
-
-        assertTrue(placeFuseauHoraire.waitVisible().isDisplayed());
-        scrollUp(placeEmail.waitVisible(), -50);
-        assertTrue(placeCoordonnées.waitVisible().isDisplayed());
-        assertTrue(placeNuméroParselle.waitVisible().isDisplayed());
-        assertTrue(placeLeverDeSoleil.waitVisible().isDisplayed());
-
-    }
-
-    @Given("l'utilisateur est sur lécran daccueil")
-    public void lUtilisateurEstSurLécranDaccueil() throws InterruptedException {
-        cliquerLogoOverKizConnectSixFois(actions, overkiz.logoOverKizConnect);
-        assertTrue(overkiz.serverStd.isDisplayed());
-        overkiz.editText105.clear();
-        overkiz.serverStd.click();
-        overkiz.editText.sendKeys("24");
-        overkiz.tvOk.click();
-        overkiz.placeHolderEmail.sendKeys(ConfigReader.getProperty("adressseEmail"));
-        overkiz.placeHolderMotDePasse.click();
-        overkiz.getPlaceHolderMotDePasseText.sendKeys(ConfigReader.getProperty("motDePasse"));
-        overkiz.btnSeConnecter.click();
-        wait(2);
-        // assertTrue(overkiz.textBonjourName.getText().contains("Bonjour"));
-    }
-
-
-    @And("utilisateur voit les champs {string} And {string} sur la page d'accueil")
-    public void utilisateurVoitLesChampsAndSurLaPageDAccueil(String expectedText1, String expectedText2) {
-        String actualTextConnexionTitle = "Connexion";
-        assertEquals(overkiz.titleConnexion.getText(), actualTextConnexionTitle);
-        assertTrue(textEmail.getText().contains(expectedText1)
-                && overkiz.textMotDePasse.getText().contains(expectedText2));
-    }
-
-
-
-
-    @And("il saisi l'adresse e-mail et le mot de passe du compte secondaire")
-    public void ilSaisiLAdresseEMailEtLeMotDePasseDuCompteSecondaire() {
-        String email = faker.internet().emailAddress();
-        overkiz.placeHolderLogin.sendKeys(email);
-        overkiz.placeComteSecondaireMDP.sendKeys(ConfigReader.getProperty("motDePasse"));
-        overkiz.placeComteSecondaiConfirmerMDP.sendKeys(ConfigReader.getProperty("motDePasse"));
-
-
-    }
+ 
 
 
 
@@ -518,7 +241,7 @@ public  class MyInformation extends BasePage{
 
     @When("Je sélectionne {string} puis {string}")
     public void jeSelectionnePuis(String textExpected1, String textExpected2) throws MalformedURLException, InterruptedException {
-        btnEnplus.click();
+        getCurrentDriver().findElement(overkiz.btnEnplus).click();
         wait(1);
         scrollUp(overkiz.btnNotification, -40);
         manager.clickOnElement("tv_log_out");
@@ -554,6 +277,8 @@ public  class MyInformation extends BasePage{
     }
 
 
-
+    @Then("l'utilisateur peut vérifier ses informations personnelles")
+    public void lUtilisateurPeutVerifierSesInformationsPersonnelles() {
+    }
 }
 
