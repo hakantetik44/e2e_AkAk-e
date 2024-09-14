@@ -169,11 +169,9 @@ public  class MyInformation extends BasePage{
 
     @When("il accède à l'application Overkiz pour accéder à son profil")
     public void ilAccedeALApplicationOverkizPourAccederASonProfil() {
-      wait(3);
 
         overkiz.clickBtnEnPlus();
 
-        wait(3);
     }
 
 

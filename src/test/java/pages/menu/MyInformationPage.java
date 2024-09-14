@@ -99,7 +99,7 @@ public class MyInformationPage {
             btnEnplus = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/nav_more") : By.id("En plus");
 
     public void clickBtnEnPlus() {
-        By btnEnplus = OS.isAndroid() ? By.id("com.overkiz."+appName+":id/nav_more") : By.id("En plus");
+        By btnEnplus = OS.isAndroid() ? By.id("comid/nav_more") : By.id("En plus");
         getCurrentDriver().findElement(btnEnplus).click();
     }
 
