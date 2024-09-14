@@ -7,7 +7,7 @@ public class OS {
     return "Android".equalsIgnoreCase(OS);
   }
 
-  public static boolean isiOS() {
-    return "iOS".equalsIgnoreCase(OS);
+  public static boolean isWeb() {
+    return "Web".equalsIgnoreCase(OS);
   }
 }

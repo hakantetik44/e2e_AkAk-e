@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.PointOption.point;
 import static utils.Driver.getCurrentDriver;
+import static utils.Driver.getWebDriver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,14 +70,14 @@ public class BasePage {
                 .perform();
     }
 
-    public static void swipe(WebElement element, String direction, double percent, int speed){
-      getCurrentDriver().executeScript("mobile: swipeGesture", ImmutableMap.of(
+   /* public static void swipe(WebElement element, String direction, double percent, int speed){
+     // getWebDriver().executeScript("mobile: swipeGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) element).getId(),
                 "direction", direction,
                 "percent", percent,
                 "speed", speed
         ));
-    }
+    }*/
 
 
     public void scrollFromButtomToUp() throws InterruptedException, MalformedURLException {
