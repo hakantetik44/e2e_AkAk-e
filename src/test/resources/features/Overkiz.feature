@@ -1,4 +1,4 @@
-Feature: Se connecter à overkiz
+Feature: Se connecter
 
   @APPSV2-1133
   Scenario Outline: Vérification des informations personnelles
@@ -7,10 +7,8 @@ Feature: Se connecter à overkiz
     When il accède à l'application Overkiz pour accéder à son profil
     Then l'utilisateur peut vérifier ses informations personnelles
     Examples:
-      | tag         |
-      | kizconnect  |
-      | hexaconnect |
-      | flexomV3    |
+      | tag        |
+      | aliexpress |
 
 
 
